@@ -1,10 +1,25 @@
+.container{
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
 .btn-sm{
     padding: 5px 16px;
 }
 
+.category-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    gap: 16px;
+}
+
 .category-btn{
     background-color: white;
-    border-radius: 30px;
+    margin-right: 8px;
+    border-radius: 30px !important;
     color: black;
 }
 
@@ -18,53 +33,93 @@
     background-color: #e9ecef;
 }
 
-.category-btns button {
-    margin-right: 0.5rem;
+.sort-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 1rem;
+    padding-right: 2rem;
 }
 
-.sort-box {
-    width: 292px;
-    height: 380px;
+.sort-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.sort-toggle img {
+    width: 32px;
+    height: 32px;
+}
+
+.sort-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    list-style: none;
+    background-color: white;
     border: 8px solid rgba(132, 132, 132, 0.4);
     border-radius: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    min-width: 220px;
-}
-
-.sort-option.selected:hover {
-  background-color: #d6e8eb;
+    width: 292px;
+    padding: 20px 10px;
+    display: none;
+    z-index: 1000;
 }
 
 .sort-option {
-    width: 50%;
+    margin-bottom: 16px;
+    padding: 10px 0;
+    text-align: center;
+    color: #6c757d;
     cursor: pointer;
-    margin: 15px 0px;
+    transition: background-color 0.2s ease;
 }
 
-.sort-box li {
-    display: flex;
-    justify-content: center;
+.sort-option.selected {
+    color: #191919;
+    background-color: #e9ecef;
+    text-decoration: underline var(--secondary-color) 3px;
+    text-underline-offset : 10px;
+}
+
+.sort-option:hover {
+    background-color: #d6e8eb;
 }
 
 .btn-apply {
-    margin-top: 40px;
-    background-color: #2A95A9;
-    border-radius: 999px;
+    display: block;
+    margin-top: 32px;
+    padding: 6px 16px;
+    background-color: var(--primary-color);
+    border-radius: 99px;
     color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
 }
 
 .btn-apply:hover {
     background-color: #4a4e69;
-    color: white;
+}
+
+.sort-container.active .sort-dropdown {
+    display: block;
+}
+
+.responsive {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .card-img-placeholder {
     width: 402px;
     height: 298px;
     background-color: #f0f0f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 30px;
     color: #888;
     font-size: 14px;

@@ -1,59 +1,85 @@
 
 $(function(){
-    $("#header").load("header.html");
-    $("#footer").load("footer.html");
-    
     $('.category-btn').click(function(){
     $('.category-btn').removeClass('active');
     $(this).addClass('active');
     });
 
-    const sortOptions = document.querySelectorAll('.sort-option');
-    sortOptions.forEach(opt => {
-        opt.addEventListener('click', () => {
-            sortOptions.forEach(o => o.classList.remove('selected'));
-            opt.classList.add('selected');
+   $('.responsive').slick({
+        dots: true,
+        infinite: false,
+        arrows:true,
+        speed: 300,
+        cssEase: 'linear',
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        responsive: [
+            {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                infinite: true,
+                dots: true
+            }
+            },
+            {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+            }
+            },
+            {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    })
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const container = document.querySelector(".sort-container");
+    const toggle = container.querySelector(".sort-toggle");
+    const sortOptions = container.querySelectorAll(".sort-option");
+    const btnApply = container.querySelector(".btn-apply");
+    const sortImg = document.querySelector('.sort-image');
+
+    toggle.addEventListener("click", function (e) {
+        sortImg.src="image/sort_sel.webp";
+        container.classList.toggle("active");
+    });
+
+    document.addEventListener("click", function (e) {
+        if (!container.contains(e.target)) {
+            container.classList.remove("active");
+            sortImg.src="image/sort_non.webp";
+        }
+    });
+
+    sortOptions.forEach(function (option) {
+        option.addEventListener("click", function () {
+            sortOptions.forEach(function (opt) {
+            opt.classList.remove("selected");
+            });
+            this.classList.add("selected");
         });
     });
 
-    $('.sort-option').on('click', function(){
-        $('.sort-option').removeClass('selected');
-        $(this).addClass('selected');
-    })
-
-    const dropdownToggleButton = $('[data-bs-toggle="dropdown"][data-bs-auto-close="false"]');
-
-    dropdownToggleButton.on('show.bs.dropdown', function () {
-        $(this).find('img').attr('src', 'image/sort_sel.webp');
-    });
-
-    dropdownToggleButton.on('hide.bs.dropdown', function () {
-        $(this).find('img').attr('src', 'image/sort_non.webp');
-    });
-
-    $('.btn-apply').on('click', function () {
-        const dropdownToggle = $('[data-bs-toggle="dropdown"][data-bs-auto-close="false"]')[0];
-        const dropdownInstance = bootstrap.Dropdown.getInstance(dropdownToggle) || new bootstrap.Dropdown(dropdownToggle);
-        dropdownInstance.hide();
-        alert("정렬 완료");
-    });
-
-    $(document).ready(function(){
-    $('.guesthouse-slider').slick({
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        dots: true,
-        arrows: true,
-        responsive: [
-        {
-            breakpoint: 768,
-            settings: { slidesToShow: 1 }
-        },
-        {
-            breakpoint: 992,
-            settings: { slidesToShow: 2 }
+    btnApply.addEventListener("click", function () {
+        const selectedOption = container.querySelector(".sort-option.selected");
+        if (selectedOption) {
+            alert("Selected option:"+ selectedOption.textContent);
+        } else {
+            alert("No option selected");
         }
-        ]
-    });
+        container.classList.remove("active");
+        sortImg.src="image/sort_non.webp";
     });
 });
