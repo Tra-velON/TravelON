@@ -21,9 +21,14 @@ html, body {
 	font-family: var(--main-font) !important;
 	font-size: 1rem;
 	margin: 0;
-	padding: 0;	
+	padding: 0;
+	height: 100%;	
 	color: var(--text-primary-color);
 	background-color: #ffffff;
+}
+
+main {
+	flex: 1;
 }
 
 ul {
@@ -37,8 +42,9 @@ a {
 }
 
 .container {
-  position: relative;
-  min-height: 100vh; /* 화면 전체 높이 */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .inner {
@@ -167,7 +173,6 @@ header .inner nav .menu span {
 
 /* footer */
 footer {
-  position: absolute;
   width: 100%;
   left: 0;
   bottom: 0;
