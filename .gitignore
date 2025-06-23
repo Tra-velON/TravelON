@@ -1,0 +1,39 @@
+# Eclipse-specific files
+/.project
+/.classpath
+/.settings/
+
+# Build directories
+/build/
+/bin/
+/target/
+
+# Maven / Gradle
+/pom.xml.tag
+/pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# IDEs
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Tomcat working directory
+/.metadata/
+/wtpwebapps/
+
+# Compiled class files
+*.class
