@@ -2,72 +2,82 @@
 
 /* 재사용 css */
 :root {
-	--main-font: "Pretendard Variable", "Pretendard";
-	--primary-color: #2A95A9;
-	--secondary-color: #555D7E;
-	--text-primary-color: #191919;
-	--text-secondary-color: #f1f1f1;
-	--input-placeholder-color: #8A8A8A;
-	--input-border-color: #B1B1B1;
-	--button-border-color: #555D7E;
-	--button-hover-bg: #555D7E;
+  --main-font: "Pretendard Variable", "Pretendard";
+  --primary-color: #2a95a9;
+  --secondary-color: #555d7e;
+  --text-primary-color: #191919;
+  --text-secondary-color: #f1f1f1;
+  --input-placeholder-color: #8a8a8a;
+  --input-border-color: #b1b1b1;
+  --button-border-color: #555d7e;
+  --button-hover-bg: #555d7e;
 }
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-html, body {
-	font-family: var(--main-font) !important;
-	font-size: 1rem;
-	margin: 0;
-	padding: 0;
-	height: 100%;	
-	color: var(--text-primary-color);
-	background-color: #ffffff;
+html,
+body {
+  font-family: var(--main-font) !important;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color: var(--text-primary-color);
+  background: #ffffff;
 }
 
 main {
-	flex: 1;
+  flex: 1;
 }
 
 ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
-.container {
+#wrap {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
 .inner {
-	width: 1280px;
-	margin: 0 auto;
+  width: 1280px;
+  margin: 0 auto;
 }
 
 img {
-	width: 100%;
-	height: 100%;
-	display: block;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 input {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 button {
-	border: none;
+  border: none;
 }
 
 /* header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(50px);
+  z-index: 99;
+}
 header .inner {
   display: flex;
   align-items: center;
@@ -93,22 +103,23 @@ header .inner .search:after {
   background-color: #191919;
 }
 header .inner .search input {
-	position: relative;
+  position: relative;
   width: 100%;
   border: none;
   padding: 0 20px;
   margin-bottom: 12px;
+  background-color: transparent;
 }
 header .inner .search input:focus {
   outline: none;
 }
 header .inner .search .search-icon {
-	position: absolute;
+  position: absolute;
   top: 50%;
   right: 20px;
-	width: 18px;
-	height: 18px;
-  background: url('../image/search.png') no-repeat center;
+  width: 18px;
+  height: 18px;
+  background: url("../image/search.png") no-repeat center;
   background-size: cover;
   transform: translateY(-70%);
   cursor: pointer;
@@ -147,6 +158,7 @@ header .inner nav ul li a {
   gap: 8px;
   color: inherit;
   font-weight: 500;
+  text-decoration: none;
 }
 header .inner nav ul li a img {
   width: 24px;
@@ -176,80 +188,100 @@ footer {
   width: 100%;
   left: 0;
   bottom: 0;
-  color: #6E6F73;
+  color: #6e6f73;
   font-size: 0.875rem;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
 }
 footer .inner {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	height: 502px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 502px;
 }
 footer .inner .logo {
-	width: 210px;
-	height: 64px;
-	margin-bottom: 40px;
+  width: 210px;
+  height: 64px;
+  margin-bottom: 40px;
 }
 footer .inner .company-info {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 footer .inner .company-info span {
-	display: block;
-	margin-bottom: 4px;
+  display: block;
+  margin-bottom: 4px;
 }
 footer .inner .company-info .company-info_detail {
-	margin-bottom: 28px;
+  margin-bottom: 28px;
 }
 footer .inner .company-info span:last-child {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 footer .inner .company-info .company-link {
-	display: flex;
-	gap: 20px;
+  display: flex;
+  gap: 20px;
 }
 footer .inner .company-info .company-link li a {
-	color: #6E6F73;
+  color: #6e6f73;
+  text-decoration: none;
 }
 footer .inner .company-info .company-link li:nth-child(2) a {
-	color: var(--text-primary-color);
-	font-weight: 700;
+  color: var(--text-primary-color);
+  font-weight: 700;
 }
 footer .inner .company-info .sns {
-	display: flex;
-	gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 footer .inner .company-info .sns li {
-	width: 36px;
-	height: 36px;
+  width: 36px;
+  height: 36px;
 }
 footer .inner .company-info .contact > span {
-	font-size: 20px;
-	margin-bottom: 12px;
+  font-size: 20px;
+  margin-bottom: 12px;
 }
 footer .inner .company-info .contact .call {
-	margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 footer .inner .company-info .contact .contact-link {
-	display: flex;
-	gap: 16px;
+  display: flex;
+  gap: 16px;
 }
 footer .inner .company-info .contact .contact-link li {
-	width: 156px;
-	height: 62px;
-	padding: 0 20px;
-	border: 2px solid #BABABA;
-	border-radius: 12px;
+  width: 156px;
+  height: 62px;
+  padding: 0 20px;
+  border: 2px solid #bababa;
+  border-radius: 12px;
 }
 footer .inner .company-info .contact .contact-link li a {
-	color: #6E6F73;
-	display: flex;
-	align-items: center;
-	gap: 16px;
-	height: 100%;
+  color: #6e6f73;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 100%;
+  text-decoration: none;
 }
 footer .inner .company-info .contact .contact-link li a .photo {
-	width: 26px;
-	height: 26px;
+  width: 26px;
+  height: 26px;
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: -100px;
+  right: 24px;
+  background-color: #ffffff;
+  border: 1px solid var(--primary-color);
+  border-radius: 50%;
+  transition: bottom 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.scroll-top.show {
+  bottom: 50px; 
+  opacity: 1;
 }
