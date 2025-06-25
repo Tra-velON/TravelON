@@ -306,9 +306,9 @@ const cardData = [
 function createCardHtml(card) {
     const priceHtml = card.soldOut ?
         `<p class="sold-out">예약마감</p>` :
-        `<p class="price">\n     
-            <del>${card.originalPrice}</del>\n
-            <span class="price-discount">${card.discountPrice}</span>\n       
+        `<p class="price">
+            <del class="original-price">${card.originalPrice}</del>
+            <span class="discount-price">${card.discountPrice}</span>
         </p>`;
     return `
         <div class="card">
@@ -343,8 +343,8 @@ function createListCardHtml(card) {
     const priceHtml = card.soldOut
         ? `<p class="sold-out">예약마감</p>`
         : `<p class="price">
-                <del>${card.originalPrice}</del>
-                <span class="price-discount">${card.discountPrice}</span>
+                <del class="original-price">${card.originalPrice}</del>
+                <span class="discount-price">${card.discountPrice}</span>
            </p>`;
 
     return `
