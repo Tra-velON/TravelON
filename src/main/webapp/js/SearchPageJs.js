@@ -12,7 +12,7 @@ $(function () {
             $('#search-total').css('display', 'block');
         } else {
             $('#search-total').css('display', 'none');
-            $('#search-list').css('display', 'flex'); // Changed 'block' to 'flex'
+            $('#search-list').css('display', 'flex');
             renderCardListViewByCategory(selectedCategory);
         }
     });
@@ -70,7 +70,12 @@ $(function () {
     // 카드 클릭
     $(document).on('click', '.card', function () {
         const title = $(this).find('.card-title').text().trim();
-        const url = `detail.html?title=${encodeURIComponent(title)}`;
+        const image = $(this).find('.card-img').attr('src');
+        const location = $(this).find('.location-text').text().trim();
+        const originalPrice = $(this).find('.original-price').text().trim();
+        const discountPrice = $(this).find('.discount-price').text().trim();
+
+        const url = `detailpage.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}&location=${encodeURIComponent(location)}&originalPrice=${encodeURIComponent(originalPrice)}&discountPrice=${encodeURIComponent(discountPrice)}`;
         window.location.href = url;
     });
 });
