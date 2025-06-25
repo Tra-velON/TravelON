@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>TravelON 찜 페이지</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.css">
+
+
+<style>
+body {
+	font-family: 'Pretendard', sans-serif;
+	margin: 0;
+	padding: 40px;
+	background: #f9f9f9;
+}
+
+.delete-container {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	max-width: 1280px;
+	margin: 140px auto 0 auto;
+	padding-right: 10px;
+}
+
+#btn-clear-all {
+	font-size: 16px;
+	cursor: pointer;
+}
+
+#btn-clear-all:hover {
+	text-decoration: underline;
+}
+
+.cards {
+	display: flex;
+	justify-content: center;
+	gap: 151px;
+	flex-wrap: wrap;
+	margin-top: 33px;
+}
+
+.card {
+	width: 559px;
+	background: #fff;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	position: relative;
+	background: #fff;
+}
+
+.checkbox {
+	position: absolute;
+	top: 10px;
+	right: 35px;
+	background: transparent;
+}
+
+.main-image-wrapper img.main {
+	object-fit: cover;
+	display: inline-block;
+	width: 518px;
+	height: 293px;
+	border-radius: 24.5px;
+	object-position: center;
+}
+
+.main-image-wrapper {
+	position: relative;
+	text-align: center;
+	margin-top: 23px;
+}
+
+.card-content {
+	padding: 16px;
+}
+
+.title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+
+.location {
+	font-size: 16px;
+	color: #555;
+	margin-bottom: 12px;
+}
+
+.room-info {
+	display: flex;
+	align-items: center;
+	margin-top: 40px;
+	width: 518px;
+}
+
+.room-info img {
+	width: 220px;
+	height: 124px;
+	border-radius: 24.5px;
+	margin-right: 10px;
+}
+
+.room-details {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-left: 10px;
+}
+
+.room-top {
+	font-size: 24px;
+	font-weight: bold;
+	color: #333;
+}
+
+.room-middle {
+	font-size: 16px;
+	color: #555;
+}
+
+.room-bottom {
+	color: #777;
+	font-size: 14px;
+}
+
+.price {
+	text-align: right;
+}
+
+.price del {
+	color: #999;
+	font-size: 16px;
+}
+
+.price span {
+	color: red;
+	font-weight: bold;
+	font-size: 24px;
+	margin-left: 5px;
+}
+
+.booking-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	max-width: 1280px;
+	margin: 196px auto 0 auto;
+	padding-right: 10px;
+	gap: 20px;
+}
+
+.btn {
+	width: 80px;
+	height: 36px;
+	line-height: 36px;
+	padding: 0;
+	font-size: 16px;
+	border-radius: 6px;
+	cursor: pointer;
+	border: none;
+	display: inline-block;
+	transition: background-color 0.3s ease, color 0.3s ease;
+	background-color: #FFFFFF !important;
+	color: #333 !important;
+	border: 1px solid #ccc !important;
+}
+
+.btn:hover {
+	background-color: #313131 !important;
+	color: white !important;
+	border-color: #007BFF !important;
+}
+
+.total-price {
+	width: 100%;
+	text-align: right;
+	margin-top: 20px;
+	font-size: 20px;
+}
+
+.booking-container p {
+	width: 100%;
+	margin-top: 12px;
+	text-align: right;
+}
+</style>
+</head>
+<body class="body">
+
+	<header id="header"></header>
+	<main>
+
+		<div class="delete-container d-flex justify-content-end mt-4 pe-3">
+			<span id="btn-clear-all" style="cursor: pointer;">전체삭제</span>
+		</div>
+		<!-- 카드 리스트 -->
+		<div class="cards">
+			<!-- 첫 번째 카드 -->
+			<div class="card">
+				<div class="main-image-wrapper">
+					<div class="checkbox">
+						<input type="checkbox" id="card1">
+					</div>
+					<img src="./image/jjim-1.webp" alt="파티앤파티" class="main" />
+				</div>
+				<div class="card-content">
+					<div class="title">파티앤파티 홍대</div>
+					<div class="location">📍 친구와 함께한 1박 2일 (수정함)</div>
+					<div class="room-info">
+						<img src="./image/jjim-3.webp" alt="싱글룸 이미지">
+						<div class="room-details">
+							<div class="room-top">싱글룸_1</div>
+							<div class="room-middle">넷플릭스, 디즈니, 티빙</div>
+							<div class="room-bottom">
+								👥기준 2인/최대 2인 <br> 🛏️퀸 침대 1개
+							</div>
+						</div>
+
+					</div>
+					<div class="price">
+						<del>45,000원</del>
+						<span>25,000원</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- 두 번째 카드 -->
+			<div class="card">
+
+				<div class="main-image-wrapper">
+					<div class="checkbox">
+						<input type="checkbox" id="card2">
+					</div>
+					<img src="./image/jjim-2.webp" alt="장기숙박형" class="main">
+				</div>
+				<div class="card-content">
+					<div class="title">장기 숙박형</div>
+					<div class="location">📍 조용히 힐링하고 가요 (수정함)</div>
+					<div class="room-info">
+						<img src="./image/jjim-3.webp" alt="싱글룸 이미지">
+						<div class="room-details">
+							<div class="room-top">싱글룸_2</div>
+							<div class="room-middle">공유라운지+셀프키친</div>
+							<div class="room-bottom">
+								👥기준 2인/최대 2인 <br> 🛏️퀸 침대 1개
+							</div>
+						</div>
+
+					</div>
+					<div class="price">
+						<del>85,000원</del>
+						<span>47,000원</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="booking-container">
+			<button class="btn btn-reserve">예약</button>
+			<button class="btn btn-delete">삭제</button>
+			<div class="total-price">
+				총 가격: <strong>72,000</strong>원
+			</div>
+		</div>
+	</main>
+	<footer id="footer"></footer>
+
+	<script src="js/common.js"></script>
+</body>
+</html>
+<script>
+  const btnClearAll = document.getElementById('btn-clear-all');
+  const btnDelete = document.querySelector('.btn-delete');
+  const cardsContainer = document.querySelector('.cards');
+
+  // 전체삭제
+  btnClearAll.addEventListener('click', () => {
+    if (confirm('찜 목록을 모두 삭제하시겠습니까?')) {
+      cardsContainer.innerHTML = ''; // 카드 모두 삭제
+      updateTotalPrice();
+      localStorage.removeItem('jjimCards');
+    }
+  });
+
+  // 선택 삭제 (체크된 카드 삭제)
+  btnDelete.addEventListener('click', () => {
+    const checkedBoxes = cardsContainer.querySelectorAll('.checkbox input[type="checkbox"]:checked');
+    if (checkedBoxes.length === 0) {
+      alert('삭제할 항목을 선택해주세요.');
+      return;
+    }
+    if (confirm('선택한 찜 목록을 삭제하시겠습니까?')) {
+      checkedBoxes.forEach(cb => {
+        const card = cb.closest('.card');
+        if (card) card.remove();
+      });
+      updateTotalPrice();
+      saveCardsToLocalStorage();
+    }
+  });
+
+  function updateTotalPrice() {
+    const totalPriceElem = document.querySelector('.total-price strong');
+    let total = 0;
+    document.querySelectorAll('.card .price span').forEach(span => {
+      const priceText = span.textContent.replace(/[^\d]/g, '');
+      total += Number(priceText);
+    });
+    totalPriceElem.textContent = total.toLocaleString();
+  }
+
+  // 찜 목록 로컬스토리지 저장 예시 (카드 제목과 가격만 저장)
+  function saveCardsToLocalStorage() {
+    const cards = [];
+    document.querySelectorAll('.card').forEach(card => {
+      const title = card.querySelector('.title')?.textContent || '';
+      const priceText = card.querySelector('.price span')?.textContent || '';
+      cards.push({ title, price: priceText });
+    });
+    localStorage.setItem('jjimCards', JSON.stringify(cards));
+  }
+
+  // 페이지 로드 시 로컬스토리지에서 카드 불러오기 (간단 예시)
+  function loadCardsFromLocalStorage() {
+    const data = localStorage.getItem('jjimCards');
+    if (!data) return;
+    const cards = JSON.parse(data);
+    cardsContainer.innerHTML = ''; // 기존 삭제
+    cards.forEach(({title, price}) => {
+      // 최소한의 카드 HTML 생성 (이미지 등은 임의로)
+      const cardHtml = `
+      <div class="card">
+        <div class="main-image-wrapper">
+          <div class="checkbox"><input type="checkbox"></div>
+          <img src="./image/jjim-1.webp" alt="${title}" class="main" />
+        </div>
+        <div class="card-content">
+          <div class="title">${title}</div>
+          <div class="price"><span>${price}</span></div>
+        </div>
+      </div>`;
+      cardsContainer.insertAdjacentHTML('beforeend', cardHtml);
+    });
+    updateTotalPrice();
+  }
+
+  // 초기 실행
+  loadCardsFromLocalStorage();
+  updateTotalPrice();
+</script> 
