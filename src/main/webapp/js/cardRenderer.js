@@ -457,57 +457,60 @@ const listObserver = new IntersectionObserver((entries) => {
 
 function renderCardListViewByCategory(category) {
     const container = document.querySelector('#search-list');
-    const spinner = document.querySelector('#search-list #spinner');
 
     currentCategory = category;
     currentFilteredCards = cardData.filter(card => card.category === category);
     loadedCount = 0;
 
-    container.innerHTML = '';
-
-    const spinnerHtml = `
-        <div id="spinner">
+    // 컨테이너 초기화 + 스피너 삽입
+    container.innerHTML = `
+        <div id="spinner" style="display: flex; pointer-events: auto;">
             <div class="spinner"></div>
         </div>
     `;
-    container.insertAdjacentHTML('beforeend', spinnerHtml);
 
-    const updatedSpinner = document.querySelector('#search-list #spinner');
-    if (updatedSpinner) updatedSpinner.classList.remove('hidden');
+    // 옵저버 초기화
+    window._observerInitialized = false;
 
+    // 정렬 후 첫 카드 로딩
     sortCardsByOption(currentSortOption);
     renderNextCards();
-
-    if (!window._observerInitialized && updatedSpinner) {
-        listObserver.observe(updatedSpinner);
-        window._observerInitialized = true;
-    }
 }
 
+
 function renderNextCards() {
+    if (isLoading) return;
+
     const container = document.querySelector('#search-list');
-    const spinner = document.querySelector('#search-list #spinner');
+    const spinner = container.querySelector('#spinner');
+
+    if (!spinner) return; // 예외 방지
 
     const nextCards = currentFilteredCards.slice(loadedCount, loadedCount + cardsPerLoad);
-
-    if (nextCards.length > 0) {
-        spinner.classList.remove('hidden');
-    }
-
     isLoading = true;
 
     setTimeout(() => {
         nextCards.forEach(card => {
             const cardHtml = createCardHtml(card);
-            container.insertAdjacentHTML('beforeend', cardHtml);
+            // 스피너 위에 카드 삽입 (중복 쌓기 방지)
+            spinner.insertAdjacentHTML('beforebegin', cardHtml);
         });
 
         loadedCount += nextCards.length;
         isLoading = false;
 
         if (loadedCount >= currentFilteredCards.length) {
-            spinner.classList.add('hidden');
+            // 모든 카드 로딩됨
+            spinner.remove(); // spinner 완전히 제거
             listObserver.unobserve(spinner);
+        } else {
+            spinner.style.display = 'flex';
+
+            // 옵저버 등록은 1번만
+            if (!window._observerInitialized) {
+                listObserver.observe(spinner);
+                window._observerInitialized = true;
+            }
         }
     }, 500);
 }
