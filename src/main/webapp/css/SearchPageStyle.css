@@ -1,3 +1,7 @@
+main {
+    margin-top: 150px;
+}
+
 .contain {
     width: 1280px !important;
     margin: 0 auto;
@@ -118,11 +122,11 @@
 }
 
 #spinner {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
 }
 
 .spinner {
@@ -339,4 +343,3 @@
     color: #666;
     margin: 0;
 }
-

@@ -375,7 +375,6 @@ function createListCardHtml(card) {
         </div>
     `;
 }
-
 function showSpinner() {
     const spinner = document.getElementById('page-spinner');
     spinner.style.display = 'flex';
@@ -386,6 +385,20 @@ function hideSpinner() {
     spinner.style.display = 'none';
 }
 
+function showListSpinner() {
+    const spinner = document.querySelector('#search-list #spinner');
+    if (spinner) {
+        spinner.style.display = 'flex';
+        spinner.style.pointerEvents = 'auto';
+    }
+}
+function hideListSpinner() {
+    const spinner = document.querySelector('#search-list #spinner');
+    if (spinner) {
+        spinner.style.display = 'none';
+        spinner.style.pointerEvents = 'none';
+    }
+}
 function renderCards() {
     showSpinner();
 
@@ -432,8 +445,7 @@ let currentFilteredCards = [];
 let loadedCount = 0;
 const cardsPerLoad = 6;
 let isLoading = false;
-
-const spinner = document.getElementById('list-spinner');
+let currentSortOption = "예약가 높은순";
 
 const listObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -445,49 +457,91 @@ const listObserver = new IntersectionObserver((entries) => {
 
 function renderCardListViewByCategory(category) {
     const container = document.querySelector('#search-list');
-    const spinner = document.getElementById('spinner');
+    const spinner = document.querySelector('#search-list #spinner');
 
     currentCategory = category;
     currentFilteredCards = cardData.filter(card => card.category === category);
     loadedCount = 0;
 
-    // 카드만 지움 (spinner는 그대로 유지)
-    const cardElements = container.querySelectorAll('.card');
-    cardElements.forEach(card => card.remove());
+    container.innerHTML = '';
 
-    spinner.style.display = 'flex';
+    const spinnerHtml = `
+        <div id="spinner">
+            <div class="spinner"></div>
+        </div>
+    `;
+    container.insertAdjacentHTML('beforeend', spinnerHtml);
+
+    const updatedSpinner = document.querySelector('#search-list #spinner');
+    if (updatedSpinner) updatedSpinner.classList.remove('hidden');
+
+    sortCardsByOption(currentSortOption);
     renderNextCards();
 
-    if (!window._observerInitialized) {
-        listObserver.observe(spinner);
+    if (!window._observerInitialized && updatedSpinner) {
+        listObserver.observe(updatedSpinner);
         window._observerInitialized = true;
     }
 }
 
 function renderNextCards() {
     const container = document.querySelector('#search-list');
-    const spinner = document.getElementById('spinner');
+    const spinner = document.querySelector('#search-list #spinner');
 
     const nextCards = currentFilteredCards.slice(loadedCount, loadedCount + cardsPerLoad);
 
     if (nextCards.length > 0) {
-        spinner.style.display = 'flex';
+        spinner.classList.remove('hidden');
     }
 
     isLoading = true;
 
     setTimeout(() => {
         nextCards.forEach(card => {
-            const cardHtml = createListCardHtml(card);
-            spinner.insertAdjacentHTML('beforebegin', cardHtml);
+            const cardHtml = createCardHtml(card);
+            container.insertAdjacentHTML('beforeend', cardHtml);
         });
 
         loadedCount += nextCards.length;
         isLoading = false;
 
         if (loadedCount >= currentFilteredCards.length) {
-            spinner.style.display = 'none';
+            spinner.classList.add('hidden');
             listObserver.unobserve(spinner);
         }
     }, 500);
+}
+
+function sortCardsByOption(optionText = "예약가 높은순") {
+    currentFilteredCards.sort((a, b) => {
+        const getPrice = (card) => {
+            if (card.soldOut) return null;
+            const priceStr = card.discountPrice || card.originalPrice;
+            if (!priceStr) return null;
+            return parseInt(priceStr.replace(/,/g, ''));
+        };
+
+        const priceA = getPrice(a);
+        const priceB = getPrice(b);
+
+        if (optionText === "예약가 낮은순") {
+            if (priceA === null) return 1;
+            if (priceB === null) return -1;
+            return priceA - priceB;
+        }
+
+        if (optionText === "예약가 높은순") {
+            if (priceA === null) return 1;
+            if (priceB === null) return -1;
+            return priceB - priceA;
+        }
+
+        if (optionText === "찜 많은 순" || optionText === "등록 많은 순") {
+            const ratingA = parseFloat(a.rating);
+            const ratingB = parseFloat(b.rating);
+            return ratingB - ratingA;
+        }
+
+        return 0;
+    });
 }
