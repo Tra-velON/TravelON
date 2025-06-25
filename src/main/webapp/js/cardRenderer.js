@@ -251,64 +251,73 @@ const cardData = [
 
 function createCardHtml(card) {
     const priceHtml = card.soldOut ?
-        `<p class=\"sold-out\">예약마감</p>` :
-        `<p class=\"price\">\n     
+        `<p class="sold-out">예약마감</p>` :
+        `<p class="price">\n     
             <del>${card.originalPrice}</del>\n
-            <span class=\"price-discount\">${card.discountPrice}</span>\n       
+            <span class="price-discount">${card.discountPrice}</span>\n       
         </p>`;
     return `
-        <div class=\"card\">
-            <div class=\"card-img-wrapper\">
-                <img src=\"${card.image}\" class=\"card-img\" alt=\"썸네일\" loading=\"lazy\" />
+        <div class="card">
+            <div class="card-img-wrapper">
+                <img src="${card.image}" class="card-img" alt="썸네일" loading="lazy" />
             </div>
-            <div class=\"card-body\">
-                <div class=\"card-head\">\n
-                    <h5 class=\"card-title\">${card.title}</h5>
-                    <div class=\"rating-heart\">\n
-                        <div class=\"rating\">\n                            
-                            <img src=\"image/star.webp\" alt=\"별점\" class=\"star-icon\">\n                            
-                            <span class=\"rating-score\">${card.rating}</span>\n                        
+            <div class="card-body">
+                <div class="card-head">\n
+                    <h5 class="card-title">${card.title}</h5>
+                    <div class="rating-heart">\n
+                        <div class="rating">\n                            
+                            <img src="image/star.webp" alt="별점" class="star-icon">\n                            
+                            <span class="rating-score">${card.rating}</span>\n                        
                         </div>
-                        <button class=\"heart-btn\">\n
-                            <img class=\"heart-img\" src=\"image/heart_non.webp\" alt=\"하트\" loading=\"lazy\"/>\n         
+                        <button class="heart-btn">\n
+                            <img class="heart-img" src="image/heart_non.webp" alt="하트" loading="lazy"/>\n         
                         </button>\n                    
                     </div>\n                
                 </div>
                 ${priceHtml}
-                <div class=\"location-box\">\n                    
-                    <img class=\"location-icon\" src=\"image/location.webp\" alt=\"위치 이미지\" loading=\"lazy\" />\n                    
-                    <p class=\"location-text\">${card.location}</p>\n                
+                <div class="location-box">\n                    
+                    <img class="location-icon" src="image/location.webp" alt="위치 이미지" loading="lazy" />\n                    
+                    <p class="location-text">${card.location}</p>\n                
                 </div>
-                <p class=\"features\">${card.features}</p>\n            
+                <p class="features">${card.features}</p>\n            
             </div>\n        
         </div>
     `;
 }
 
 function createListCardHtml(card) {
-    const priceHtml = card.soldOut ?
-        `<p class="sold-out">예약마감</p>` :
-        `<p class="price">
-            <del>${card.originalPrice}</del>
-            <span class="price-discount">${card.discountPrice}</span>
-        </p>`;
+    const priceHtml = card.soldOut
+        ? `<p class="sold-out">예약마감</p>`
+        : `<p class="price">
+                <del>${card.originalPrice}</del>
+                <span class="price-discount">${card.discountPrice}</span>
+           </p>`;
 
     return `
-        <div class="card list-card">
-            <img src="${card.image}" class="card-img" alt="썸네일" />
+        <div class="card">
+            <div class="card-img-wrapper">
+                <img src="${card.image}" class="card-img" alt="썸네일" loading="lazy" />
+            </div>
             <div class="card-body">
-                <h5 class="card-title">${card.title}</h5>
-                <div class="rating">
-                    <img src="image/star.webp" alt="별점" class="star-icon" />
-                    <span class="rating-score">${card.rating}</span>
+                <div class="card-head">\n
+                    <h5 class="card-title">${card.title}</h5>
+                    <div class="rating-heart">\n
+                        <div class="rating">\n                            
+                            <img src="image/star.webp" alt="별점" class="star-icon">\n                            
+                            <span class="rating-score">${card.rating}</span>\n                        
+                        </div>
+                        <button class="heart-btn">\n
+                            <img class="heart-img" src="image/heart_non.webp" alt="하트" loading="lazy"/>\n         
+                        </button>\n                    
+                    </div>\n                
                 </div>
                 ${priceHtml}
-                <div class="location-box">
-                    <img class="location-icon" src="image/location.webp" alt="위치" />
-                    <p class="location-text">${card.location}</p>
+                <div class="location-box">\n                    
+                    <img class="location-icon" src="image/location.webp" alt="위치 이미지" loading="lazy" />\n                    
+                    <p class="location-text">${card.location}</p>\n                
                 </div>
-                <p class="features">${card.features}</p>
-            </div>
+                <p class="features">${card.features}</p>\n            
+            </div>\n        
         </div>
     `;
 }

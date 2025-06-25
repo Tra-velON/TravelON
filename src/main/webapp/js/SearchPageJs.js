@@ -17,9 +17,9 @@ $(function () {
         }
     });
 
-    $('#search-total').show();
-    
     renderCards();
+
+    $('#search-total').show();
 
     const container = document.querySelector(".sort-container");
     const toggle = container.querySelector(".sort-toggle");
@@ -55,10 +55,26 @@ $(function () {
         sortImg.src = "image/sort_non.webp";
     });
 
-    // 찜 버튼
-    $(document).on('click', '.heart-btn', function () {
+    $(document).on('click', '.heart-btn', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+
         const heartImg = $(this).find('.heart-img');
-        const isActive = heartImg.toggleClass('heart-active').hasClass('heart-active');
-        heartImg.attr('src', isActive ? "image/heart_sel.webp" : "image/heart_non.webp");
+        const isActive = heartImg.hasClass('heart-active');
+
+        if (isActive) {
+            heartImg.removeClass('heart-active');
+            heartImg.attr('src', "image/heart_non.webp");
+        } else {
+            heartImg.addClass('heart-active');
+            heartImg.attr('src', "image/heart_sel.webp");
+        }
+    });
+
+    $(document).on('click', '.card', function () {
+        const title = $(this).find('.card-title').text().trim();
+        const url = `detail.html?title=${encodeURIComponent(title)}`;
+        window.location.href = url;
     });
 });
+

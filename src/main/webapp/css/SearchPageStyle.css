@@ -132,6 +132,7 @@
     }
 }
 
+
 #search-total,
 #search-list {
     display: none;
@@ -140,6 +141,16 @@
 #search-total.active,
 #search-list.active {
     display: block;
+}
+
+#search-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 20px;
+    padding: 20px 0;
+    width: 1280px;
+    margin: 0 auto;
 }
 
 .gh-title {
@@ -224,15 +235,17 @@
 }
 
 .card {
-    width: 420px;
+    width: 390px;
     height: 475px;
+    border: none !important;
     border-radius: 30px !important;
     display: flex;
     justify-content: center;
     overflow: hidden;
     flex-direction: column;
-    margin: 16px;
+    margin: 10px;
     flex-shrink: 0 !important;
+    cursor: pointer;
 }
 
 .box {
@@ -320,91 +333,3 @@
     margin: 0;
 }
 
-#search-list.list-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: flex-start;
-    /* 왼쪽 정렬 시 flex-start, 오른쪽은 flex-end */
-    padding: 20px 0;
-    width: 1280px;
-    margin: 0 auto;
-}
-
-.card.list-card {
-    width: 400px;
-    height: 475px;
-    border-radius: 30px;
-    overflow: hidden;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    margin-top: 100px;
-    flex-shrink: 0;
-}
-
-.card.list-card .card-img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-}
-
-.card.list-card .card-body {
-    padding: 20px;
-    flex: 1;
-}
-
-.card.list-card .card-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0 0 10px 0;
-}
-
-.card.list-card .rating {
-    display: flex;
-    align-items: center;
-    margin-bottom: 6px;
-}
-
-.card.list-card .sold-out {
-    margin: 8px 0;
-    font-weight: bold;
-    color: #2A95A9;
-}
-
-.card.list-card .price {
-    font-size: 15px;
-    color: #666;
-}
-
-.card.list-card .price-discount {
-    color: red;
-    font-weight: bold;
-    margin-left: 8px;
-}
-
-.card.list-card .location-box {
-    display: flex;
-    align-items: center;
-    margin-bottom: 6px;
-    gap: 4px;
-}
-
-.card.list-card .location-icon {
-    width: 14px;
-    height: 16px;
-}
-
-.card.list-card .location-text {
-    font-size: 14px;
-    color: #444;
-    margin: 0;
-}
-
-.card.list-card .features {
-    font-size: 13px;
-    color: #666;
-    margin: 0;
-}
