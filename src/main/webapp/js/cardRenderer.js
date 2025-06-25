@@ -1,251 +1,305 @@
 const cardData = [
-    // 도미토리형
+    // 도미토리형 - 10개
     {
         category: "도미토리형",
+        image: "image/eximage1.webp",
+        title: "해변가 하우스",
+        rating: "4.5",
+        soldOut: true,
+        location: "강원도 강릉시",
+        features: "바다 전망, 공용 주방, 아침 식사"
+    },
+    {
+        category: "도미토리형",
+        image: "image/eximage2.webp",
+        title: "소나무 게스트하우스",
+        rating: "4.3",
+        originalPrice: "38,000",
+        discountPrice: "28,000",
+        location: "강원도 강릉시",
+        features: "주차 제공, 도보 5분 해변, 와이파이"
+    },
+    {
+        category: "도미토리형",
+        image: "image/eximage3.webp",
+        title: "바다소리 숙소",
+        rating: "4.0",
+        originalPrice: "42,000",
+        discountPrice: "30,000",
+        location: "강원도 강릉시",
+        features: "개별 락커, 커피 제공, 와이파이"
+    },
+    {
+        category: "도미토리형",
+        image: "image/eximage4.webp",
+        title: "별밤 하우스",
+        rating: "4.6",
+        originalPrice: "45,000",
+        discountPrice: "32,000",
+        location: "강원도 강릉시",
+        features: "루프탑, BBQ 가능, 조식 포함"
+    },
+    {
+        category: "도미토리형",
+        image: "image/eximage5.webp",
+        title: "게스트 코지룸",
+        rating: "4.1",
+        soldOut: true,
+        location: "강원도 강릉시",
+        features: "여성 전용, 조용한 동네, 공유 거실"
+    },
+    {
+        category: "도미토리형",
+        image: "image/eximage6.webp",
+        title: "파도 게스트하우스",
+        rating: "4.4",
+        originalPrice: "39,000",
+        discountPrice: "27,000",
+        location: "강원도 강릉시",
+        features: "해변 접근성, 와이파이, 주차"
+    },
+    {
+        category: "도미토리형",
+        image: "image/eximage2.webp",
+        title: "블루하버 게스트하우스",
+        rating: "4.2",
+        originalPrice: "36,000",
+        discountPrice: "25,000",
+        location: "강원도 강릉시",
+        features: "주차 가능, 수건 제공, 무료 음료"
+    },
+    {
+        category: "도미토리형",
+        image: "image/eximage1.webp",
+        title: "아침햇살 숙소",
+        rating: "4.3",
+        originalPrice: "41,000",
+        discountPrice: "29,000",
+        location: "강원도 강릉시",
+        features: "공용 키친, 리셉션 운영, 조식 포함"
+    },
+    {
+        category: "도미토리형",
+        image: "image/eximage3.webp",
+        title: "여행자의 쉼터",
+        rating: "4.1",
+        soldOut: true,
+        location: "강원도 강릉시",
+        features: "침대 커튼, 조용한 분위기, 무료 와이파이"
+    },
+    {
+        category: "도미토리형",
+        image: "image/eximage6.webp",
+        title: "게스트 라운지",
+        rating: "4.0",
+        originalPrice: "37,000",
+        discountPrice: "26,000",
+        location: "강원도 강릉시",
+        features: "에어컨, 공용 욕실, 커피머신"
+    },
+
+    // 프라이빗형 - 5개
+    {
+        category: "프라이빗형",
+        image: "image/eximage4.webp",
+        title: "프라이빗 하우스 강릉",
+        rating: "4.5",
+        originalPrice: "60,000",
+        discountPrice: "45,000",
+        location: "강원도 강릉시",
+        features: "개별 욕실, 넷플릭스 지원, 발코니"
+    },
+    {
+        category: "프라이빗형",
         image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
+        title: "산책길 숙소",
+        rating: "4.3",
+        soldOut: true,
+        location: "강원도 강릉시",
+        features: "전용 출입문, 아늑한 침대, 정원 전망"
+    },
+    {
+        category: "프라이빗형",
+        image: "image/eximage5.webp",
+        title: "조용한 마을 게스트하우스",
+        rating: "4.4",
+        originalPrice: "55,000",
+        discountPrice: "39,000",
+        location: "강원도 강릉시",
+        features: "주방 이용 가능, 주차 가능, 전용 공간"
+    },
+    {
+        category: "프라이빗형",
+        image: "image/eximage2.webp",
+        title: "레트로 룸",
+        rating: "4.2",
+        originalPrice: "50,000",
+        discountPrice: "36,000",
+        location: "강원도 강릉시",
+        features: "빈티지 인테리어, 개인 욕실, 발코니"
+    },
+    {
+        category: "프라이빗형",
+        image: "image/eximage6.webp",
+        title: "힐링 프라이빗룸",
+        rating: "4.6",
+        originalPrice: "58,000",
+        discountPrice: "42,000",
+        location: "강원도 강릉시",
+        features: "TV, 소파, 테이블, 정원"
+    },
+
+    // 패밀리/독채형 - 5개
+    {
+        category: "패밀리/독채형",
+        image: "image/eximage1.webp",
+        title: "패밀리 독채 하우스",
+        rating: "4.7",
+        originalPrice: "120,000",
+        discountPrice: "89,000",
+        location: "강원도 강릉시",
+        features: "독채, 취사 가능, 넓은 거실"
+    },
+    {
+        category: "패밀리/독채형",
+        image: "image/eximage3.webp",
+        title: "바다뷰 패밀리룸",
+        rating: "4.5",
+        soldOut: true,
+        location: "강원도 강릉시",
+        features: "2베드룸, 바다 전망, 전용 주차"
+    },
+    {
+        category: "패밀리/독채형",
+        image: "image/eximage4.webp",
+        title: "가족형 게스트하우스",
+        rating: "4.3",
+        originalPrice: "110,000",
+        discountPrice: "82,000",
+        location: "강원도 강릉시",
+        features: "BBQ 가능, 정원, 게임기 구비"
+    },
+    {
+        category: "패밀리/독채형",
+        image: "image/eximage6.webp",
+        title: "숲속의 하우스",
+        rating: "4.4",
+        originalPrice: "100,000",
+        discountPrice: "75,000",
+        location: "강원도 강릉시",
+        features: "독채, 캠프파이어, 큰 마당"
+    },
+    {
+        category: "패밀리/독채형",
+        image: "image/eximage2.webp",
+        title: "감성 독채",
+        rating: "4.5",
+        originalPrice: "130,000",
+        discountPrice: "95,000",
+        location: "강원도 강릉시",
+        features: "원목 인테리어, 가족 여행 최적, TV"
+    },
+
+    // 테마형/특수형 - 5개
+    {
+        category: "테마형/특수형",
+        image: "image/eximage.webp",
+        title: "한옥 체험 숙소",
+        rating: "4.8",
+        originalPrice: "80,000",
+        discountPrice: "60,000",
+        location: "강원도 강릉시",
+        features: "한옥, 전통 복식 체험, 조식 제공"
+    },
+    {
+        category: "테마형/특수형",
+        image: "image/eximage5.webp",
+        title: "캠핑 컨셉 게스트하우스",
         rating: "4.2",
         soldOut: true,
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
+        location: "강원도 강릉시",
+        features: "글램핑 스타일, 공용 화장실, BBQ"
     },
     {
-        category: "도미토리형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
+        category: "테마형/특수형",
+        image: "image/eximage6.webp",
+        title: "만화방 콘셉트 숙소",
+        rating: "4.1",
+        originalPrice: "50,000",
+        discountPrice: "38,000",
+        location: "강원도 강릉시",
+        features: "만화책 구비, 게이밍 PC, 대형 모니터"
     },
     {
-        category: "도미토리형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
+        category: "테마형/특수형",
+        image: "image/eximage1.webp",
+        title: "레트로 감성 하우스",
+        rating: "4.0",
+        originalPrice: "55,000",
+        discountPrice: "40,000",
+        location: "강원도 강릉시",
+        features: "옛날 소품, 필름카메라 대여, LP플레이어"
     },
     {
-        category: "도미토리형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "도미토리형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "도미토리형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
+        category: "테마형/특수형",
+        image: "image/eximage3.webp",
+        title: "우주 테마 숙소",
+        rating: "4.6",
+        originalPrice: "70,000",
+        discountPrice: "52,000",
+        location: "강원도 강릉시",
+        features: "우주 침낭, 무중력 의자, 빔프로젝터"
     },
 
-    // 프라이빗형
-    {
-        category: "프라이빗형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "프라이빗형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "프라이빗형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "프라이빗형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "프라이빗형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "프라이빗형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-
-    // 패밀리/독채형
-    {
-        category: "패밀리/독채형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "패밀리/독채형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "패밀리/독채형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "패밀리/독채형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-
-    // 테마형/특수형
-    {
-        category: "테마형/특수형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "테마형/특수형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "테마형/특수형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "테마형/특수형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-    {
-        category: "테마형/특수형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
-    },
-
-    // 장기 숙박형
+    // 장기 숙박형 - 5개
     {
         category: "장기 숙박형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
+        image: "image/eximage2.webp",
+        title: "장기 게스트하우스 강릉",
+        rating: "4.3",
+        originalPrice: "30,000",
+        discountPrice: "22,000",
+        location: "강원도 강릉시",
+        features: "세탁기, 주방, 책상 구비"
     },
     {
         category: "장기 숙박형",
         image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
-        rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
+        title: "코워킹 게스트하우스",
+        rating: "4.4",
+        soldOut: true,
+        location: "강원도 강릉시",
+        features: "공용 사무공간, 커피머신, 프린터"
     },
     {
         category: "장기 숙박형",
-        image: "image/eximage.webp",
-        title: "G 게스트하우스 이태원",
+        image: "image/eximage5.webp",
+        title: "원룸형 게스트하우스",
         rating: "4.2",
-        originalPrice: "40,000",
-        discountPrice: "25,000",
-        location: "경기도 안양시 동안구",
-        features: "무료 와이파이, 주차 제공, 식사 제공"
+        originalPrice: "35,000",
+        discountPrice: "26,000",
+        location: "강원도 강릉시",
+        features: "침대+책상, 주방 완비, 욕실"
+    },
+    {
+        category: "장기 숙박형",
+        image: "image/eximage6.webp",
+        title: "워크앤레스트 하우스",
+        rating: "4.1",
+        originalPrice: "33,000",
+        discountPrice: "24,000",
+        location: "강원도 강릉시",
+        features: "집중 공간, 콘센트 많음, 조용함"
+    },
+    {
+        category: "장기 숙박형",
+        image: "image/eximage1.webp",
+        title: "장기전용 하우스",
+        rating: "4.5",
+        originalPrice: "38,000",
+        discountPrice: "28,000",
+        location: "강원도 강릉시",
+        features: "청소 서비스, 책상, 빠른 와이파이"
     }
 ];
 
@@ -305,7 +359,7 @@ function createListCardHtml(card) {
                         <div class="rating">\n                            
                             <img src="image/star.webp" alt="별점" class="star-icon">\n                            
                             <span class="rating-score">${card.rating}</span>\n                        
-                        </div>
+                        </div>  
                         <button class="heart-btn">\n
                             <img class="heart-img" src="image/heart_non.webp" alt="하트" loading="lazy"/>\n         
                         </button>\n                    
@@ -323,12 +377,12 @@ function createListCardHtml(card) {
 }
 
 function showSpinner() {
-    const spinner = document.getElementById('spinner');
+    const spinner = document.getElementById('page-spinner');
     spinner.style.display = 'flex';
 }
 
 function hideSpinner() {
-    const spinner = document.getElementById('spinner');
+    const spinner = document.getElementById('page-spinner');
     spinner.style.display = 'none';
 }
 
@@ -373,20 +427,67 @@ function renderCards() {
     }, 1000);
 }
 
+let currentCategory = '';
+let currentFilteredCards = [];
+let loadedCount = 0;
+const cardsPerLoad = 6;
+let isLoading = false;
+
+const spinner = document.getElementById('list-spinner');
+
+const listObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !isLoading) {
+            renderNextCards();
+        }
+    });
+});
+
 function renderCardListViewByCategory(category) {
     const container = document.querySelector('#search-list');
     const spinner = document.getElementById('spinner');
 
+    currentCategory = category;
+    currentFilteredCards = cardData.filter(card => card.category === category);
+    loadedCount = 0;
+
+    // 카드만 지움 (spinner는 그대로 유지)
+    const cardElements = container.querySelectorAll('.card');
+    cardElements.forEach(card => card.remove());
+
     spinner.style.display = 'flex';
-    container.innerHTML = '';
+    renderNextCards();
+
+    if (!window._observerInitialized) {
+        listObserver.observe(spinner);
+        window._observerInitialized = true;
+    }
+}
+
+function renderNextCards() {
+    const container = document.querySelector('#search-list');
+    const spinner = document.getElementById('spinner');
+
+    const nextCards = currentFilteredCards.slice(loadedCount, loadedCount + cardsPerLoad);
+
+    if (nextCards.length > 0) {
+        spinner.style.display = 'flex';
+    }
+
+    isLoading = true;
 
     setTimeout(() => {
-        const filteredCards = cardData.filter(card => card.category === category);
-
-        filteredCards.forEach(card => {
-            container.insertAdjacentHTML('beforeend', createListCardHtml(card));
+        nextCards.forEach(card => {
+            const cardHtml = createListCardHtml(card);
+            spinner.insertAdjacentHTML('beforebegin', cardHtml);
         });
 
-        spinner.style.display = 'none';
+        loadedCount += nextCards.length;
+        isLoading = false;
+
+        if (loadedCount >= currentFilteredCards.length) {
+            spinner.style.display = 'none';
+            listObserver.unobserve(spinner);
+        }
     }, 500);
 }

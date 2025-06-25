@@ -17,9 +17,9 @@ $(function () {
         }
     });
 
-    renderCards();
-
     $('#search-total').show();
+
+    renderCards(); 
 
     const container = document.querySelector(".sort-container");
     const toggle = container.querySelector(".sort-toggle");
