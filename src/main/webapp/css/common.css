@@ -124,6 +124,7 @@ header .inner .search .search-icon {
   background-size: cover;
   transform: translateY(-70%);
   cursor: pointer;
+  z-index: 100;
 }
 header .inner nav {
   display: flex;

@@ -24,6 +24,21 @@ fetch("include/header.html")
         menubar.classList.remove("active");
       });
     }
+
+    // 검색어 입력 후 페이지 이동
+    $('.search-icon').on('click', () => {
+      const query = $('#searchInput').val().trim();
+      if (query) {
+        window.location.href = `searchpage.html?query=${encodeURIComponent(query)}`;
+      }
+    });
+
+    // 검색어 입력 후 Enter키로도 이동 가능
+    $('#searchInput').on('keypress', function (e) {
+      if (e.which === 13) {
+        $('.search-icon').click();
+      }
+    });
   });
 
 /**
