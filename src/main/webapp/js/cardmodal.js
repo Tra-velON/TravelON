@@ -1,53 +1,101 @@
-// 입력 시 다음 칸 자동 이동
-const cardInputs = document.querySelectorAll('.card-input');
+function initCardModalJS() {
+  const cardInputs = document.querySelectorAll('.card-input');
+  const submitBtn = document.getElementById('submitCard');
 
-cardInputs.forEach((input, idx) => {
-  input.addEventListener('input', () => {
-    if (input.value.length === 4 && idx < cardInputs.length - 1) {
-      cardInputs[idx + 1].focus();
+  // 자동 이동
+  cardInputs.forEach((input, idx) => {
+    input.addEventListener('input', () => {
+      if (input.value.length === 4 && idx < cardInputs.length - 1) {
+        cardInputs[idx + 1].focus();
+      }
+    });
+  });
+
+  // 카드 제출 버튼
+  submitBtn?.addEventListener('click', () => {
+    const cardCompany = document.getElementById('cardCompanySelect')?.value || '';
+
+    // ✅ 카드 번호 4칸 합치기
+    let cardNumber = '';
+    cardInputs.forEach(input => {
+      cardNumber += input.value.trim();
+    });
+
+    // 확인용 콘솔
+    console.log('카드사:', cardCompany);
+    console.log('카드번호:', cardNumber);  // 여기에 잘 나와야 함
+
+    if (!cardNumber || cardNumber.length < 16) {
+      alert('카드번호를 정확히 입력해주세요.');
+      return;
     }
+
+    const reservations = JSON.parse(localStorage.getItem('reservations') || '[]');
+
+    if (reservations.length > 0) {
+      reservations[0].user.cardCompany = cardCompany;
+      reservations[0].user.cardNumber = cardNumber;
+
+      localStorage.setItem('reservations', JSON.stringify(reservations));
+    }
+
+
+
+    document.getElementById('cardModal').style.display = 'none';
+
+    fetch("totalmodal.html")
+      .then(res => {
+        if (!res.ok) throw new Error("파일 불러오기 실패");
+        return res.text();
+      })
+      .then(html => {
+
+        const existingModal = document.getElementById('checkModal');
+        if (existingModal) existingModal.remove();
+        
+        const modalWrapper = document.createElement('div');
+        modalWrapper.innerHTML = html;
+        document.body.appendChild(modalWrapper);
+
+        const checkModal = document.getElementById('checkModal');
+        if (checkModal) {
+          checkModal.style.display = 'flex';
+        } else {
+          console.warn('checkModal이 DOM에 없습니다.');
+        }
+
+        const script = document.createElement("script");
+        script.src = "js/totalmodal.js";
+        script.onload = () => {
+          if (typeof populateCheckModal === 'function') {
+            populateCheckModal();
+          } else {
+            console.warn("populateCheckModal 함수 없음");
+          }
+        };
+        document.body.appendChild(script);
+      })
+      .catch(err => {
+        console.error(err);
+        alert("예약 확인 모달을 불러오지 못했습니다.");
+      });
   });
-});
 
-// "다음" 버튼 클릭 시
-document.getElementById('submitCard').addEventListener('click', function () {
-  // 카드번호 4칸 합치기
-  let cardNumber = '';
-  cardInputs.forEach(input => {
-    cardNumber += input.value.trim();
+  // 닫기 버튼
+  document.getElementById('cardModalCloseBtn')?.addEventListener('click', () => {
+    document.getElementById('cardModal').style.display = 'none';
   });
 
-  // 이름과 이메일 입력값 가져오기
-  const name = document.getElementById('nameInput').value.trim();
-  const email = document.getElementById('emailInput').value.trim();
+  // 기존 유저 정보 반영
+  const reservations = JSON.parse(localStorage.getItem('reservations') || '[]');
+  if (reservations.length > 0) {
+    const nameInput = document.getElementById('payerName');
+    const emailInput = document.getElementById('payerEmail');
 
-  // 로컬스토리지에 저장
-  localStorage.setItem('cardNumber', cardNumber);
-  localStorage.setItem('userName', name);
-  localStorage.setItem('userEmail', email);
+    nameInput.value = reservations[0].user.name || '';
+    nameInput.setAttribute('readonly', true);
 
-  // 예약 정보 모달로 이동 (예: 모달 전환)
-  document.getElementById('modalWrap').style.display = 'none';
-  document.getElementById('reserveModal').style.display = 'block';
-});
-
-
-// "취소" 버튼 클릭 시
-document.getElementById("cancleReserveInfo").addEventListener("click", () => {
-  // 로컬스토리지 값 삭제
-  localStorage.removeItem('cardNumber');
-  localStorage.removeItem('userName');
-  localStorage.removeItem('userEmail');
-
-  // 찜 페이지로 이동
-  location.href = "jjim.html"; // ← 찜 페이지 경로로 수정
-});
-
-// "예약" 버튼 클릭 시
-document.getElementById("confirmReserveInfo").addEventListener("click", () => {
-  // 예약 모달 닫기
-  document.getElementById('reserveModal').style.display = 'none';
-
-  // (선택) alert 표시
-  alert("예약이 완료되었습니다!");
-});
+    emailInput.value = reservations[0].user.email || '';
+    emailInput.setAttribute('readonly', true);
+  }
+}

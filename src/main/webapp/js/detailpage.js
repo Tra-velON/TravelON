@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const image = $('#detail-image').attr('src');
         const location = $('#detail-location').text().trim();
         const roomType = roomcard.find('.room-title').text().trim();
-        const roomImage= roomcard.find('.room-img').attr('src');
+        const roomImage = roomcard.find('.room-img').attr('src');
         const originalPrice = roomcard.find('.original-price').text().trim();
         const discountPrice = roomcard.find('.discount-price').text().trim();
         const limit = roomcard.find('.room-limit').text().trim();
@@ -352,7 +352,33 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem('reservations', JSON.stringify(reservationArr));
 
         alert('예약 정보가 저장되었습니다.');
+        modal.style.display = 'none';
 
+        // 2. 카드 결제 모달을 비동기로 로드
+        fetch("cardmodal.html")
+            .then(res => {
+                if (!res.ok) throw new Error("파일 불러오기 실패");
+                return res.text();
+            })
+            .then(html => {
+                const cardModal = document.getElementById("cardModal");
+                cardModal.innerHTML = html;
+                cardModal.style.display = "flex";
+
+                // 내부 모달 열기
+                const inner = cardModal.querySelector(".card-payment-modal");
+                if (inner) inner.style.display = "block";
+                const script = document.createElement("script");
+                script.src = "js/cardmodal.js";
+                script.onload = () => {
+                    initCardModalJS();
+                };
+
+                document.body.appendChild(script);
+            })
+            .catch(err => {
+                alert("카드 결제 모달을 불러오지 못했습니다.");
+            });
     });
 });
 
