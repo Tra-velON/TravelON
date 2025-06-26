@@ -435,7 +435,7 @@ function renderCards() {
             slidesToScroll: 2,
             rows: 1,
         });
-
+        restoreHeartButtons();
         hideSpinner();
     }, 1000);
 }
@@ -474,6 +474,7 @@ function renderCardListViewByCategory(category) {
 
     // 정렬 후 첫 카드 로딩
     sortCardsByOption(currentSortOption);
+    restoreHeartButtons();
     renderNextCards();
 }
 
@@ -503,6 +504,7 @@ function renderNextCards() {
             // 모든 카드 로딩됨
             spinner.remove(); // spinner 완전히 제거
             listObserver.unobserve(spinner);
+
         } else {
             spinner.style.display = 'flex';
 
@@ -512,7 +514,9 @@ function renderNextCards() {
                 window._observerInitialized = true;
             }
         }
+
     }, 500);
+
 }
 
 function sortCardsByOption(optionText = "예약가 높은순") {

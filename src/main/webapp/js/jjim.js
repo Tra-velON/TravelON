@@ -42,13 +42,20 @@ cardsContainer.addEventListener('change', (e) => {
 
 function updateTotalPrice() {
   let total = 0;
+
   document.querySelectorAll('.card').forEach(card => {
     const checkbox = card.querySelector('.checkbox input[type="checkbox"]');
-    if (checkbox.checked) {
-      const priceText = card.querySelector('.price span')?.textContent.replace(/[^\d]/g, '') || '0';
-      total += Number(priceText);
+
+    if (checkbox && checkbox.checked) {
+      // 🔥 모든 방 가격을 선택해서 합산
+      const priceSpans = card.querySelectorAll('.price span');
+      priceSpans.forEach(span => {
+        const price = Number(span.textContent.replace(/[^\d]/g, '')) || 0;
+        total += price;
+      });
     }
   });
+
   totalPriceElem.textContent = total.toLocaleString();
 }
 
@@ -107,33 +114,95 @@ function saveCardsToLocalStorage() {
   localStorage.setItem('jjimCards', JSON.stringify(cards));
 }
 
+let num = 0;
+
 function loadCardsFromLocalStorage() {
-  const data = localStorage.getItem('jjimCards');
-  if (!data) return;
-  const cards = JSON.parse(data);
+  const cards = JSON.parse(localStorage.getItem('jjimCards') || '[]');
   cardsContainer.innerHTML = '';
-  cards.forEach(({ title, price }) => {
+  let num = 0;
+
+  if(cards.length === 0) {
+    cardsContainer.innerHTML = `<span class="none-data">찜한 항목이 없습니다.</span>`;
+    return;
+  }
+
+  cards.forEach(({ image, title, location, rooms }) => {
+    num++;
+    let roomSection = '';
+
+    if (Array.isArray(rooms) && rooms.length > 1) {
+      //  여러 방일 경우 slick 슬라이더로
+      const roomSlides = rooms.map(room => `
+        <div class="room-slide">
+          <div class="room-info">
+            <img src="${room.roomImage || 'image/default.webp'}" alt="룸 이미지" />
+            <div class="room-details">
+              <div class="room-top">${room.roomType}</div>
+              <div class="room-middle">공유라운지+셀프키친</div>
+              <div class="room-bottom">👥 ${room.limit} <br /> 🛏️ ${room.beds}</div>
+            </div>
+            <div class="price">
+              <div class="original-price"><del>${room.originalPrice}</del></div>
+              <div class="discount-price"><span>${room.discountPrice}</span></div>
+            </div>
+          </div>
+        </div>
+
+      `).join('');
+
+      roomSection = `<div class="room-slider">${roomSlides}</div>`;
+    } else if (Array.isArray(rooms) && rooms.length === 1) {
+      // 방이 하나일 경우 슬릭 없이 단독 출력
+      const room = rooms[0];
+      roomSection = `
+        <div class="room-slide">
+          <div class="room-info">
+            <img src="${room.roomImage || 'image/default.webp'}" alt="룸 이미지" />
+            <div class="room-details">
+              <div class="room-top">${room.roomType}</div>
+              <div class="room-middle">공유라운지+셀프키친</div>
+              <div class="room-bottom">👥 ${room.limit} <br /> 🛏️ ${room.beds}</div>
+            </div>
+          </div>
+          <div class="price">
+            <div class="original-price"><del>${room.originalPrice}</del></div>
+            <div class="discount-price"><span>${room.discountPrice}</span></div>
+          </div>
+        </div>
+      `;
+    } else {
+      roomSection = `<div class="no-room">등록된 방 정보가 없습니다.</div>`;
+    }
+
     const cardHtml = `
       <div class="card">
         <div class="main-image-wrapper">
-          <div class="checkbox"><input type="checkbox"></div>
-          <img src="./image/jjim-1.webp" alt="${title}" class="main" />
+          <div class="checkbox">
+            <input type="checkbox" id="card${num}" />
+          </div>
+          <img src="${image}" alt="${title}" class="main" />
         </div>
         <div class="card-content">
           <div class="title">${title}</div>
-          <div class="room-info">
-            <div class="room-details">
-              <div class="room-top">싱글룸</div>
-            </div>
-          </div>
-          <div class="price"><span>${price}</span></div>
+          <div class="location">${location}</div>
+          ${roomSection}
         </div>
-      </div>`;
+      </div>
+    `;
+
     cardsContainer.insertAdjacentHTML('beforeend', cardHtml);
   });
-  updateTotalPrice();
-}
 
+  $('.room-slider').not('.slick-initialized').slick({
+    slidesToShow: 1,
+    arrows: true,
+    dots: false,
+    infinite: false,
+    adaptiveHeight: true
+  });
+
+  updateTotalPrice?.();
+}
 // 초기 실행
 loadCardsFromLocalStorage();
 updateTotalPrice();
