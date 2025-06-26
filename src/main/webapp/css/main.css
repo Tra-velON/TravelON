@@ -22,13 +22,6 @@ section.intro .intro-bg {
   background: url("../image/intro.jpg") no-repeat;
   background-size: cover;
 }
-section.intro .scroll-btn {
-  position: absolute;
-  bottom: 360px;
-  left: 50%;
-  transform: translateX(-50%);
-  cursor: pointer;
-}
 
 /* section: notice */
 section.notice {
@@ -66,6 +59,7 @@ section.event .title {
 }
 section.event .content {
   display: flex;
+  gap: 86px;
   justify-content: space-between;
   color: #f1f1f1;
 }
@@ -89,29 +83,51 @@ section.event .content .main .info > div span {
   font-size: 2.125rem;
   font-weight: bold;
 }
-section.event .content ul {
+section.event .content .event-wrap {
+  position: relative;
+  width: 706px;
+}
+section.event .content .event-lists {
   display: flex;
   gap: 46px;
   align-items: center;
 }
-section.event .content ul li {
+section.event .content .event-lists .event-list {
   border-radius: 16px;
+  width: 330px;
+  height: 330px;
   position: relative;
 }
-section.event .content ul li .photo {
+section.event .content .event-lists .event-list .photo {
   border-radius: 16px;
   overflow: hidden;
 }
-section.event .content ul li .info {
+section.event .content .event-lists .event-list .info {
   position: absolute;
   top: 20px;
   left: 20px;
   z-index: 9;
 }
-section.event .content ul li .info .info-detail span {
+section.event .content .event-lists .event-list .info .info-detail span {
   display: block;
   font-size: 2.125rem;
   font-weight: bold;
+}
+section.event .swiper-pagination {
+  margin-top: 460px;
+  margin-left: 372px;
+  width: 330px;
+  height: 8px;
+  background-color: #EFEFEF;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.swiper-pagination-progressbar-fill {
+  background-color: var(--primary-color, #2a95a9);
+  border-radius: 4px;
+  height: 100%;
+  transition: width 0.3s ease;
 }
 
 /* section: benefit */
@@ -175,10 +191,11 @@ section.weeklysale {
   margin-top: 72px;
 }
 section.weeklysale .inner .title {
-  font-size: x-large;
+  font-size: 1.125rem;
   margin-bottom: 36px;
 }
 section.weeklysale .inner .content {
+  position: relative;
   margin-top: 36px;
 }
 section.weeklysale .inner .content ul {
@@ -204,6 +221,32 @@ section.weeklysale .inner .content ul li .info .price .sale {
   font-weight: medium;
   margin-right: 12px;
 }
+section.weeklysale .swiper-button-prev,
+section.weeklysale .swiper-button-next {
+  z-index: 99; /* 버튼이 위에 보이도록 */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--primary-color, #2a95a9);
+  border-radius: 50%;
+  background-color: #fff;
+  transition: all .3s ease;
+}
+section.weeklysale .swiper-button-next:after,
+section.weeklysale .swiper-button-prev:after {
+  font-size: 14px;
+  color: var(--primary-color, #2a95a9);
+}
+section.weeklysale .swiper-button-prev:hover,
+section.weeklysale .swiper-button-next:hover {
+  background-color: var(--primary-color);
+}
+section.weeklysale .swiper-button-next:hover:after,
+section.weeklysale .swiper-button-prev:hover:after {
+  color: #fff;
+}
 
 /* section: weeklyrecommend */
 section.weeklyrecommend {
@@ -214,6 +257,7 @@ section.weeklyrecommend .inner .title {
   margin-bottom: 36px;
 }
 section.weeklyrecommend .content {
+  position: relative;
   margin-top: 36px;
 }
 section.weeklyrecommend .content ul {
@@ -241,6 +285,34 @@ section.weeklyrecommend .content ul li .info h3 {
   font-size: 1.25rem;
   color: var(--text-secondary-color);
   z-index: 9;
+}
+section.weeklyrecommend .swiper-button-prev,
+section.weeklyrecommend .swiper-button-next {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--primary-color, #2a95a9);
+  border-radius: 50%;
+  background-color: #fff;
+  transition: all .3s ease;
+}
+section.weeklyrecommend .swiper-button-prev {
+  left: 1170px;
+}
+section.weeklyrecommend .swiper-button-next:after,
+section.weeklyrecommend .swiper-button-prev:after {
+  font-size: 14px;
+  color: var(--primary-color, #2a95a9);
+}
+section.weeklyrecommend .swiper-button-prev:hover,
+section.weeklyrecommend .swiper-button-next:hover {
+  background-color: var(--primary-color);
+}
+section.weeklyrecommend .swiper-button-next:hover:after,
+section.weeklyrecommend .swiper-button-prev:hover:after {
+  color: #fff;
 }
 
 /* section: skip_ad */
@@ -321,13 +393,13 @@ section.popular .content .tabs .tab.active {
   color: var(--text-secondary-color);
   background-color: #191919;
 }
-section.popular .content .lists {
+section.popular .content .popularlists {
   display: flex;
   justify-content: space-between;
   margin: 0;
   padding: 0;
 }
-section.popular .content .lists .list {
+section.popular .content .popularlists .list {
   position: relative;
   width: 400px;
   height: 270px;
@@ -336,7 +408,14 @@ section.popular .content .lists .list {
   overflow: hidden;
   cursor: pointer;
 }
-section.popular .content .lists .list .info {
+section.popular .content .popularlists .list .photo {
+  width: 400px;
+  height: 270px;
+}
+section.popular .content .popularlists .list .photo img {
+  display: block;
+}
+section.popular .content .popularlists .list .info {
   position: absolute;
   top: 20px;
   left: 20px;
@@ -344,7 +423,7 @@ section.popular .content .lists .list .info {
   height: 84px;
   z-index: 9;
 }
-section.popular .content .lists .list .info span {
+section.popular .content .popularlists .list .info span {
   font-size: 1.875rem;
   font-weight: bold;
 }
