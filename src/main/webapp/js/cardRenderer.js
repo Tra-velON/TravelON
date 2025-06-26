@@ -6,7 +6,7 @@ const cardData = [
         title: "해변가 하우스",
         rating: "4.5",
         soldOut: true,
-        location: "강원도 강릉시",
+        location: "서울특별시 홍대",
         features: "바다 전망, 공용 주방, 아침 식사"
     },
     {
@@ -36,7 +36,7 @@ const cardData = [
         rating: "4.6",
         originalPrice: "45,000",
         discountPrice: "32,000",
-        location: "강원도 강릉시",
+        location: "서울특별시 용산",
         features: "루프탑, BBQ 가능, 조식 포함"
     },
     {
@@ -106,7 +106,7 @@ const cardData = [
         rating: "4.5",
         originalPrice: "60,000",
         discountPrice: "45,000",
-        location: "강원도 강릉시",
+        location: "서울특별시 서울역",
         features: "개별 욕실, 넷플릭스 지원, 발코니"
     },
     {
@@ -303,248 +303,244 @@ const cardData = [
     }
 ];
 
+// === 카드 HTML 생성 함수 ===
 function createCardHtml(card) {
-    const priceHtml = card.soldOut ?
-        `<p class="sold-out">예약마감</p>` :
-        `<p class="price">
-            <del class="original-price">${card.originalPrice}</del>
-            <span class="discount-price">${card.discountPrice}</span>
-        </p>`;
-    return `
-        <div class="card">
-            <div class="card-img-wrapper">
-                <img src="${card.image}" class="card-img" alt="썸네일" loading="lazy" />
+  const priceHtml = card.soldOut
+    ? `<p class="sold-out">예약마감</p>`
+    : `<p class="price">
+         <del class="original-price">${card.originalPrice || ''}</del>
+         <span class="discount-price">${card.discountPrice || ''}</span>
+       </p>`;
+
+  return `
+    <div class="card">
+      <div class="card-img-wrapper">
+        <img src="${card.image}" class="card-img" alt="썸네일" loading="lazy" />
+      </div>
+      <div class="card-body">
+        <div class="card-head">
+          <h5 class="card-title">${card.title}</h5>
+          <div class="rating-heart">
+            <div class="rating">
+              <img src="image/star.webp" alt="별점" class="star-icon" />
+              <span class="rating-score">${card.rating}</span>
             </div>
-            <div class="card-body">
-                <div class="card-head">\n
-                    <h5 class="card-title">${card.title}</h5>
-                    <div class="rating-heart">\n
-                        <div class="rating">\n                            
-                            <img src="image/star.webp" alt="별점" class="star-icon">\n                            
-                            <span class="rating-score">${card.rating}</span>\n                        
-                        </div>
-                        <button class="heart-btn">\n
-                            <img class="heart-img" src="image/heart_non.webp" alt="하트" loading="lazy"/>\n         
-                        </button>\n                    
-                    </div>\n                
-                </div>
-                ${priceHtml}
-                <div class="location-box">\n                    
-                    <img class="location-icon" src="image/location.webp" alt="위치 이미지" loading="lazy" />\n                    
-                    <p class="location-text">${card.location}</p>\n                
-                </div>
-                <p class="features">${card.features}</p>\n            
-            </div>\n        
+            <button class="heart-btn">
+              <img class="heart-img" src="image/heart_non.webp" alt="하트" loading="lazy" />
+            </button>
+          </div>
         </div>
-    `;
+        ${priceHtml}
+        <div class="location-box">
+          <img class="location-icon" src="image/location.webp" alt="위치 이미지" loading="lazy" />
+          <p class="location-text">${card.location}</p>
+        </div>
+        <p class="features">${card.features}</p>
+      </div>
+    </div>
+  `;
 }
 
-function createListCardHtml(card) {
-    const priceHtml = card.soldOut
-        ? `<p class="sold-out">예약마감</p>`
-        : `<p class="price">
-                <del class="original-price">${card.originalPrice}</del>
-                <span class="discount-price">${card.discountPrice}</span>
-           </p>`;
+// === 카드 HTML 생성 함수 ===
+function createCardHtml(card) {
+  const priceHtml = card.soldOut
+    ? `<p class="sold-out">예약마감</p>`
+    : `<p class="price">
+         <del class="original-price">${card.originalPrice || ''}</del>
+         <span class="discount-price">${card.discountPrice || ''}</span>
+       </p>`;
 
-    return `
-        <div class="card">
-            <div class="card-img-wrapper">
-                <img src="${card.image}" class="card-img" alt="썸네일" loading="lazy" />
+  return `
+    <div class="card">
+      <div class="card-img-wrapper">
+        <img src="${card.image}" class="card-img" alt="썸네일" loading="lazy" />
+      </div>
+      <div class="card-body">
+        <div class="card-head">
+          <h5 class="card-title">${card.title}</h5>
+          <div class="rating-heart">
+            <div class="rating">
+              <img src="image/star.webp" alt="별점" class="star-icon" />
+              <span class="rating-score">${card.rating}</span>
             </div>
-            <div class="card-body">
-                <div class="card-head">\n
-                    <h5 class="card-title">${card.title}</h5>
-                    <div class="rating-heart">\n
-                        <div class="rating">\n                            
-                            <img src="image/star.webp" alt="별점" class="star-icon">\n                            
-                            <span class="rating-score">${card.rating}</span>\n                        
-                        </div>  
-                        <button class="heart-btn">\n
-                            <img class="heart-img" src="image/heart_non.webp" alt="하트" loading="lazy"/>\n         
-                        </button>\n                    
-                    </div>\n                
-                </div>
-                ${priceHtml}
-                <div class="location-box">\n                    
-                    <img class="location-icon" src="image/location.webp" alt="위치 이미지" loading="lazy" />\n                    
-                    <p class="location-text">${card.location}</p>\n                
-                </div>
-                <p class="features">${card.features}</p>\n            
-            </div>\n        
+            <button class="heart-btn">
+              <img class="heart-img" src="image/heart_non.webp" alt="하트" loading="lazy" />
+            </button>
+          </div>
         </div>
-    `;
-}
-function showSpinner() {
-    const spinner = document.getElementById('page-spinner');
-    spinner.style.display = 'flex';
-}
-
-function hideSpinner() {
-    const spinner = document.getElementById('page-spinner');
-    spinner.style.display = 'none';
-}
-
-function showListSpinner() {
-    const spinner = document.querySelector('#search-list #spinner');
-    if (spinner) {
-        spinner.style.display = 'flex';
-        spinner.style.pointerEvents = 'auto';
-    }
-}
-function hideListSpinner() {
-    const spinner = document.querySelector('#search-list #spinner');
-    if (spinner) {
-        spinner.style.display = 'none';
-        spinner.style.pointerEvents = 'none';
-    }
-}
-function renderCards() {
-    showSpinner();
-
-    setTimeout(() => {
-        const categories = {};
-        document.querySelectorAll('.category-group').forEach(group => {
-            const title = group.querySelector('.gh-title')?.textContent.trim();
-            const container = group.querySelector('.responsive');
-            if (title && container) {
-                categories[title] = container;
-            }
-        });
-
-        // Clear existing cards
-        for (const key in categories) {
-            categories[key].innerHTML = '';
-        }
-
-        // Render new cards
-        cardData.forEach(card => {
-            const container = categories[card.category];
-            if (container) {
-                container.insertAdjacentHTML('beforeend', createCardHtml(card));
-            }
-        });
-
-        // Init slick
-        $('.responsive').slick({
-            dots: true,
-            arrows: true,
-            infinite: false,
-            speed: 300,
-            slidesToShow: 3,
-            slidesToScroll: 2,
-            rows: 1,
-        });
-
-        hideSpinner();
-    }, 1000);
+        ${priceHtml}
+        <div class="location-box">
+          <img class="location-icon" src="image/location.webp" alt="위치 이미지" loading="lazy" />
+          <p class="location-text">${card.location}</p>
+        </div>
+        <p class="features">${card.features}</p>
+      </div>
+    </div>
+  `;
 }
 
-let currentCategory = '';
+// === 전역 상태 변수 ===
 let currentFilteredCards = [];
 let loadedCount = 0;
 const cardsPerLoad = 6;
 let isLoading = false;
-let currentSortOption = "예약가 높은순";
 
+// === IntersectionObserver 무한스크롤 설정 ===
 const listObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !isLoading) {
-            renderNextCards();
-        }
-    });
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !isLoading) {
+      renderNextCards();
+    }
+  });
 });
 
-function renderCardListViewByCategory(category) {
-    const container = document.querySelector('#search-list');
+// === 검색 결과 렌더링 함수 ===
+function renderSearchResults(searchQuery) {
+  if (!searchQuery) {
+    document.querySelector('#search-list').innerHTML =
+      '<p style="padding:20px; text-align:center;">검색어를 입력해주세요.</p>';
+    return;
+  }
 
-    currentCategory = category;
-    currentFilteredCards = cardData.filter(card => card.category === category);
-    loadedCount = 0;
+  currentCategory = '검색 결과';
 
-    // 컨테이너 초기화 + 스피너 삽입
-    container.innerHTML = `
-        <div id="spinner" style="display: flex; pointer-events: auto;">
-            <div class="spinner"></div>
-        </div>
-    `;
+  const normalize = (text) => text?.replace(/\s+/g, '').toLowerCase().trim();
+  const normalizedQuery = normalize(searchQuery);
 
-    // 옵저버 초기화
-    window._observerInitialized = false;
+  currentFilteredCards = cardData.filter(card => {
+    const titleMatch = normalize(card.title)?.includes(normalizedQuery);
+    const locationMatch = normalize(card.location)?.includes(normalizedQuery);
+    const featuresMatch = normalize(card.features)?.includes(normalizedQuery);
+    const originalPriceMatch = normalize(card.originalPrice || '')?.includes(normalizedQuery);
+    const discountPriceMatch = normalize(card.discountPrice || '')?.includes(normalizedQuery);
 
-    // 정렬 후 첫 카드 로딩
-    sortCardsByOption(currentSortOption);
-    renderNextCards();
+    return titleMatch || locationMatch || featuresMatch || originalPriceMatch || discountPriceMatch;
+  });
+
+  loadedCount = 0;
+
+  const container = document.querySelector('#search-list');
+
+  if (currentFilteredCards.length === 0) {
+    container.innerHTML = '<p style="padding:20px; text-align:center;">검색 결과가 없습니다.</p>';
+    return;
+  }
+
+  container.innerHTML = `
+    <div id="spinner" style="display: flex; pointer-events: auto;">
+      <div class="spinner"></div>
+    </div>
+  `;
+
+  window._observerInitialized = false;
+  sortCardsByOption(currentSortOption);
+  renderNextCards();
 }
 
-
+// === 다음 카드들 렌더링 (무한스크롤용) ===
 function renderNextCards() {
-    if (isLoading) return;
+  if (isLoading) return;
 
-    const container = document.querySelector('#search-list');
-    const spinner = container.querySelector('#spinner');
+  const container = document.querySelector('#search-list');
+  const spinner = container.querySelector('#spinner');
+  if (!spinner) return;
 
-    if (!spinner) return; // 예외 방지
+  const nextCards = currentFilteredCards.slice(loadedCount, loadedCount + cardsPerLoad);
+  isLoading = true;
 
-    const nextCards = currentFilteredCards.slice(loadedCount, loadedCount + cardsPerLoad);
-    isLoading = true;
+  setTimeout(() => {
+    if (nextCards.length === 0 && loadedCount === 0) {
+      container.innerHTML = '<p style="padding:20px; text-align:center;">검색 결과가 없습니다.</p>';
+      return;
+    }
 
-    setTimeout(() => {
-        nextCards.forEach(card => {
-            const cardHtml = createCardHtml(card);
-            // 스피너 위에 카드 삽입 (중복 쌓기 방지)
-            spinner.insertAdjacentHTML('beforebegin', cardHtml);
-        });
-
-        loadedCount += nextCards.length;
-        isLoading = false;
-
-        if (loadedCount >= currentFilteredCards.length) {
-            // 모든 카드 로딩됨
-            spinner.remove(); // spinner 완전히 제거
-            listObserver.unobserve(spinner);
-        } else {
-            spinner.style.display = 'flex';
-
-            // 옵저버 등록은 1번만
-            if (!window._observerInitialized) {
-                listObserver.observe(spinner);
-                window._observerInitialized = true;
-            }
-        }
-    }, 500);
-}
-
-function sortCardsByOption(optionText = "예약가 높은순") {
-    currentFilteredCards.sort((a, b) => {
-        const getPrice = (card) => {
-            if (card.soldOut) return null;
-            const priceStr = card.discountPrice || card.originalPrice;
-            if (!priceStr) return null;
-            return parseInt(priceStr.replace(/,/g, ''));
-        };
-
-        const priceA = getPrice(a);
-        const priceB = getPrice(b);
-
-        if (optionText === "예약가 낮은순") {
-            if (priceA === null) return 1;
-            if (priceB === null) return -1;
-            return priceA - priceB;
-        }
-
-        if (optionText === "예약가 높은순") {
-            if (priceA === null) return 1;
-            if (priceB === null) return -1;
-            return priceB - priceA;
-        }
-
-        if (optionText === "찜 많은 순" || optionText === "등록 많은 순") {
-            const ratingA = parseFloat(a.rating);
-            const ratingB = parseFloat(b.rating);
-            return ratingB - ratingA;
-        }
-
-        return 0;
+    nextCards.forEach(card => {
+      const cardHtml = createCardHtml(card);
+      spinner.insertAdjacentHTML('beforebegin', cardHtml);
     });
+
+    loadedCount += nextCards.length;
+    isLoading = false;
+
+    if (loadedCount >= currentFilteredCards.length) {
+      spinner.remove();
+      listObserver.unobserve(spinner);
+    } else {
+      spinner.style.display = 'flex';
+
+      if (!window._observerInitialized) {
+        listObserver.observe(spinner);
+        window._observerInitialized = true;
+      }
+    }
+  }, 500);
 }
+
+// === 정렬 함수 ===
+function sortCardsByOption(optionText = "예약가 높은순") {
+  currentFilteredCards.sort((a, b) => {
+    const getPrice = (card) => {
+      if (card.soldOut) return null;
+      const priceStr = card.discountPrice || card.originalPrice;
+      if (!priceStr) return null;
+      return parseInt(priceStr.replace(/,/g, ''));
+    };
+
+    const priceA = getPrice(a);
+    const priceB = getPrice(b);
+
+    if (optionText === "예약가 낮은순") {
+      if (priceA === null) return 1;
+      if (priceB === null) return -1;
+      return priceA - priceB;
+    }
+
+    if (optionText === "예약가 높은순") {
+      if (priceA === null) return 1;
+      if (priceB === null) return -1;
+      return priceB - priceA;
+    }
+
+    if (optionText === "찜 많은 순" || optionText === "등록 많은 순") {
+      const ratingA = parseFloat(a.rating);
+      const ratingB = parseFloat(b.rating);
+      return ratingB - ratingA;
+    }
+
+    return 0;
+  });
+}
+
+// === 하트 버튼 토글 이벤트 ===
+$(document).on('click', '.heart-btn', function (e) {
+  e.preventDefault();
+  e.stopPropagation();
+  const heartImg = $(this).find('.heart-img');
+  heartImg.toggleClass('heart-active');
+  heartImg.attr('src', heartImg.hasClass('heart-active') ? "image/heart_sel.webp" : "image/heart_non.webp");
+});
+
+// === 카드 클릭 시 상세페이지 이동 ===
+$(document).on('click', '.card', function () {
+  const title = $(this).find('.card-title').text().trim();
+  const image = $(this).find('.card-img').attr('src');
+  const location = $(this).find('.location-text').text().trim();
+  const originalPrice = $(this).find('.original-price').text().trim();
+  const discountPrice = $(this).find('.discount-price').text().trim();
+  const url = `detailpage.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}&location=${encodeURIComponent(location)}&originalPrice=${encodeURIComponent(originalPrice)}&discountPrice=${encodeURIComponent(discountPrice)}`;
+  window.location.href = url;
+});
+
+// === 페이지 로드 시 검색어 읽고 렌더링 시작 ===
+$(function () {
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get('query') || '';
+
+  if (!query) {
+    document.querySelector('#search-list').innerHTML =
+      '<p style="padding:20px; text-align:center;">검색어를 입력해주세요.</p>';
+    return;
+  }
+
+  renderSearchResults(query);
+});
