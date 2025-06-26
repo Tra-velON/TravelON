@@ -292,3 +292,74 @@ footer .inner .company-info .contact .contact-link li a .photo {
   bottom: 50px; 
   opacity: 1;
 }
+
+/* Confirm Modal */
+#confirmModal {
+  display: none;
+  position: fixed;
+  top: 150px;
+  right: 300px;
+  width: 80%;
+  max-width: 500px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.1s;
+  z-index: 999;
+}
+#confirmModal.show {
+  display: block;
+  opacity: 1;
+}
+#confirmModal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+}
+#confirmModal .modal-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+#confirmModal .modal-body {
+  padding: 20px 0;
+  font-size: 1rem;
+  color: var(--text-primary-color);
+  line-height: 1.5;
+}
+#confirmModal .modal-body p {
+  text-align: center;
+}
+#confirmModal .modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+#confirmModal .btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+#confirmModal .btn-secondary {
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  color: var(--text-primary-color);
+}
+#confirmModal .btn-secondary:hover {
+  color: #fff;
+  background-color: #b5b5b5;
+}
+#confirmModal .btn-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+}
+#confirmModal .btn-primary:hover {
+  background-color: #247a92;
+}
