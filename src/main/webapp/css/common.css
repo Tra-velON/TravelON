@@ -118,71 +118,17 @@ header .inner .search .search-icon {
   position: absolute;
   top: 50%;
   right: 20px;
-  width: 18px;
-  height: 18px;
-  background: url("../image/search.png") no-repeat center;
-  background-size: cover;
-  transform: translateY(-70%);
+  font-size: 20px;
+  color: #191919;
   cursor: pointer;
+  transform: translateY(-50%);
   z-index: 100;
 }
-header .inner nav {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-header .inner nav ul {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin: 0;
-  padding: 0;
-}
-header .inner nav ul li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100px;
-  height: 44px;
-  border-radius: 30px;
-  border: 1px solid var(--button-border-color);
-  cursor: pointer;
-}
-header .inner nav ul li:first-child {
-  background-color: var(--primary-color);
-  border: none;
-  color: var(--text-secondary-color);
-}
-header .inner nav ul li a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: inherit;
-  font-weight: 500;
-  text-decoration: none;
-}
-header .inner nav ul li a img {
-  width: 24px;
-  height: 24px;
-}
-header .inner nav ul li a span {
-  line-height: 1;
-}
-header .inner nav .menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-}
-header .inner nav .menu span {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: #191919;
+
+/* 활성화된 상태에서 X 아이콘 스타일 */
+header .inner .search .search-icon.active {
+  color: #191919;
+  font-size: 20px;
 }
 
 /* footer */

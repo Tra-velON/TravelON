@@ -6,37 +6,57 @@ fetch("include/header.html")
   .then((data) => {
     document.getElementById("header").innerHTML = data;
 
-    // header 로드 완료 후에 .menu 이벤트 등록
+    // 메뉴 버튼 이벤트
     const menuBtn = document.querySelector(".menu");
     const closeBtn = document.querySelector(".close-btn");
     const menubar = document.querySelector(".menubar");
 
-    // 메뉴버튼 클릭 시 menubar visible
     if (menuBtn) {
       menuBtn.addEventListener("click", () => {
         menubar.classList.add("active");
       });
     }
-
-    // 메뉴버튼 클릭 시 menubar hidden
     if (closeBtn) {
       closeBtn.addEventListener("click", () => {
         menubar.classList.remove("active");
       });
     }
 
-    // 검색어 입력 후 페이지 이동
-    $('.search-icon').on('click', () => {
-      const query = $('#searchInput').val().trim();
-      if (query) {
+    // 검색 기능
+    const $searchInput = $('#searchInput');
+    const $searchIcon = $('.search-icon');
+
+    // URL에서 query 값 가져오기
+    const params = new URLSearchParams(window.location.search);
+    const savedQuery = params.get('query');
+
+    if (savedQuery) {
+      $searchInput.val(savedQuery).css('color', '#191919');
+      $searchIcon.addClass('active');
+      // Font Awesome 아이콘으로 설정 (X 아이콘)
+      $searchIcon.html('<i class="fas fa-times"></i>');
+    }
+
+    // 검색 아이콘 클릭
+    $searchIcon.on('click', function () {
+      const query = $searchInput.val().trim();
+
+      if ($(this).hasClass('active')) {
+        // 닫기 아이콘 클릭 시 초기화
+        $searchInput.val('');
+        $(this).removeClass('active');
+        // Font Awesome 검색 아이콘으로 변경
+        $(this).html('<i class="fas fa-search"></i>');
+      } else if (query) {
+        // 검색 실행
         window.location.href = `searchpage.html?query=${encodeURIComponent(query)}`;
       }
     });
 
-    // 검색어 입력 후 Enter키로도 이동 가능
-    $('#searchInput').on('keypress', function (e) {
+    // Enter 키로도 검색
+    $searchInput.on('keypress', function (e) {
       if (e.which === 13) {
-        $('.search-icon').click();
+        $searchIcon.click();
       }
     });
   });
@@ -69,10 +89,9 @@ document.addEventListener("DOMContentLoaded", () => {
   scrollTopBtn.addEventListener("click", () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: "smooth"
     });
 
-    // 스크롤 올라간 후 버튼 숨기기
     setTimeout(() => {
       scrollTopBtn.classList.remove("show");
     }, 600);
