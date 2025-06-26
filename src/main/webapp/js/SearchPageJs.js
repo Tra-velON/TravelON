@@ -10,6 +10,7 @@ $(function () {
         if (selectedCategory === "전체") {
             $('#search-list').css('display', 'none');
             $('#search-total').css('display', 'block');
+            restoreHeartButtons();
         } else {
             $('#search-total').css('display', 'none');
             $('#search-list').css('display', 'flex');
@@ -20,7 +21,6 @@ $(function () {
     // 초기 전체 뷰 표시
     $('#search-total').show();
     renderCards();
-
     // 정렬 토글
     const container = document.querySelector(".sort-container");
     const toggle = container.querySelector(".sort-toggle");
@@ -63,8 +63,29 @@ $(function () {
         e.stopPropagation();
         const heartImg = $(this).find('.heart-img');
         heartImg.toggleClass('heart-active');
-        const isActive = heartImg.hasClass('heart-active');
-        heartImg.attr('src', isActive ? "image/heart_sel.webp" : "image/heart_non.webp");
+        heartImg.attr('src', heartImg.hasClass('heart-active') ? "image/heart_sel.webp" : "image/heart_non.webp");
+
+        const card = $(this).closest('.card');
+        const title = card.find('.card-title').text().trim();
+        const image = card.find('.card-img').attr('src');
+        const location = card.find('.location-text').text().trim();
+
+        let jjimCards = JSON.parse(localStorage.getItem('jjimCards') || '[]');
+        const exists = jjimCards.some(item => item.title === title);
+
+        if (exists) {
+            // 찜 해제
+            jjimCards = jjimCards.filter(item => item.title !== title);
+            heartImg.removeClass('heart-active');
+            heartImg.attr('src', 'image/heart_non.webp');
+        } else {
+            // 찜 추가
+            jjimCards.push({ title, image, location});
+            heartImg.addClass('heart-active');
+            heartImg.attr('src', 'image/heart_sel.webp');
+        }
+
+        localStorage.setItem('jjimCards', JSON.stringify(jjimCards));
     });
 
     // 카드 클릭
@@ -78,4 +99,24 @@ $(function () {
         const url = `detailpage.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}&location=${encodeURIComponent(location)}&originalPrice=${encodeURIComponent(originalPrice)}&discountPrice=${encodeURIComponent(discountPrice)}`;
         window.location.href = url;
     });
+
+
 });
+
+function restoreHeartButtons() {
+    const jjimCards = JSON.parse(localStorage.getItem('jjimCards') || '[]');
+
+    $('.card').each(function () {
+        const title = $(this).find('.card-title').text().trim();
+        const heartImg = $(this).find('.heart-img');
+
+        const isJjimmed = jjimCards.some(item => item.title === title);
+        if (isJjimmed) {
+            heartImg.addClass('heart-active');
+            heartImg.attr('src', 'image/heart_sel.webp');
+        } else {
+            heartImg.removeClass('heart-active');
+            heartImg.attr('src', 'image/heart_non.webp');
+        }
+    });
+}
