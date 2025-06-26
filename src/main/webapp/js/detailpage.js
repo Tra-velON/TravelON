@@ -121,11 +121,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     $(document).ready(function () {
         $('.image-slider').slick({
+            dots: true,
+            arrows: true,
+            infinite: false,
+            speed: 300,
             slidesToShow: 1,
             slidesToScroll: 1,
-            arrows: true,
-            dots: true,
-            infinite: false,
+            rows: 1,
         });
     });
 
@@ -160,8 +162,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const isActive = heartImg.hasClass('heart-active');
         heartImg.attr('src', isActive ? "image/heart_sel.webp" : "image/heart_non.webp");
-    });
 
+        const roomcard = $(this).closest('.room-card');
+        const title = $('#detail-title').text().trim();
+        const image = $('#detail-image').attr('src');
+        const location = $('#detail-location').text().trim();
+        const roomType = roomcard.find('.room-title').text().trim();
+        const roomImage= roomcard.find('.room-img').attr('src');
+        const originalPrice = roomcard.find('.original-price').text().trim();
+        const discountPrice = roomcard.find('.discount-price').text().trim();
+        const limit = roomcard.find('.room-limit').text().trim();
+        const beds = roomcard.find('.room-bed').text().trim();
+
+        let jjimCards = JSON.parse(localStorage.getItem('jjimCards') || '[]');
+        const existing = jjimCards.find(item => item.title === title);
+
+        const roomObj = { roomImage, roomType, originalPrice, discountPrice, limit, beds };
+
+        if (existing) {
+            existing.rooms = existing.rooms || [];
+
+            // 동일한 방이 있는지 체크
+            const isRoomExists = existing.rooms.some(
+                room => room.roomType === roomObj.roomType && room.originalPrice === roomObj.originalPrice
+            );
+
+            if (isRoomExists) {
+                // 해당 방만 제거
+                existing.rooms = existing.rooms.filter(
+                    room => !(room.roomType === roomObj.roomType && room.originalPrice === roomObj.originalPrice)
+                );
+
+                // 모든 방이 제거되었으면 게스트하우스도 제거
+                if (existing.rooms.length === 0) {
+                    jjimCards = jjimCards.filter(item => item.title !== title);
+                }
+            } else {
+                // 방 추가
+                existing.rooms.push(roomObj);
+            }
+        } else {
+            // 게스트하우스 자체가 처음이면 새로 추가
+            jjimCards.push({
+                title,
+                image,
+                location,
+                rooms: [roomObj]
+            });
+        }
+
+        localStorage.setItem('jjimCards', JSON.stringify(jjimCards));
+    });
+    restoreHeartButtonsForDetail();
 
     const modal = document.getElementById('modalWrap');
     const closeBtn = document.getElementById('modalCloseBtn');
@@ -304,6 +356,53 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+function restoreHeartButtonsForDetail() {
+    const jjimCards = JSON.parse(localStorage.getItem('jjimCards') || '[]');
+    const currentTitle = $('#detail-title').text().trim();
 
+    const guesthouse = jjimCards.find(item => item.title === currentTitle);
+    if (!guesthouse || !guesthouse.rooms) return;
 
+    $('.room-card').each(function () {
+        const roomTitle = $(this).find('.room-title').text().trim();
+        const originalPrice = $(this).find('.original-price').text().trim();
+        const heartImg = $(this).find('.heart-img');
 
+        const isRoomJjimmed = guesthouse.rooms.some(
+            room => room.roomType === roomTitle && room.originalPrice === originalPrice
+        );
+
+        if (isRoomJjimmed) {
+            heartImg.addClass('heart-active');
+            heartImg.attr('src', 'image/heart_sel.webp');
+        } else {
+            heartImg.removeClass('heart-active');
+            heartImg.attr('src', 'image/heart_non.webp');
+        }
+    });
+}
+
+function restoreHeartButtonsForDetail() {
+    const jjimCards = JSON.parse(localStorage.getItem('jjimCards') || '[]');
+    const currentTitle = $('#detail-title').text().trim();
+    const guesthouse = jjimCards.find(item => item.title === currentTitle);
+    if (!guesthouse || !guesthouse.rooms) return;
+
+    $('.room-card').each(function () {
+        const roomType = $(this).find('.room-title').text().trim();
+        const originalPrice = $(this).find('.original-price').text().trim();
+        const heartImg = $(this).find('.heart-img');
+
+        const isRoomJjimmed = guesthouse.rooms.some(
+            room => room.roomType === roomType && room.originalPrice === originalPrice
+        );
+
+        if (isRoomJjimmed) {
+            heartImg.addClass('heart-active');
+            heartImg.attr('src', 'image/heart_sel.webp');
+        } else {
+            heartImg.removeClass('heart-active');
+            heartImg.attr('src', 'image/heart_non.webp');
+        }
+    });
+}
