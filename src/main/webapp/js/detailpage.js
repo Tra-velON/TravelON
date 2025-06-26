@@ -42,6 +42,7 @@ const reviewData = [
         image: "image/client03.png"
     },
 ];
+
 // 별점 렌더 함수
 function renderStars(rating) {
     let html = '';
@@ -98,6 +99,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const originalEl = card.querySelector(".original-price");
             const discountEl = card.querySelector(".discount-price");
 
+            if (baseDiscount == 0) {
+                originalEl.textContent = " ";
+                discountEl.textContent = "예약이 마감되었습니다.";
+                $(card).find('.reserve-btn')
+                    .prop('disabled', true)
+                    .text('예약 마감')
+                    .addClass('disabled-btn');
+                return;
+            }
+
             if (originalEl && discountEl) {
                 const finalOriginal = baseOriginal + priceGap;
                 const finalDiscount = baseDiscount + priceGap;
@@ -150,5 +161,149 @@ document.addEventListener("DOMContentLoaded", () => {
         const isActive = heartImg.hasClass('heart-active');
         heartImg.attr('src', isActive ? "image/heart_sel.webp" : "image/heart_non.webp");
     });
+
+
+    const modal = document.getElementById('modalWrap');
+    const closeBtn = document.getElementById('modalCloseBtn');
+    const stayDateInput = document.getElementById('stayDateInput');
+    const icon = document.querySelector('.date-picker-icon');
+    const btnNext = document.querySelector('.btn-next');
+
+    $('.reserve-btn').on('click', function (e) {
+        const card = $(this).closest('.room-card');
+        const title = card.find('.room-title').text().trim();
+        const room = title; // 또는 다른 로직으로 room명 지정
+
+        const selectedData = [{ title, room }];
+
+        localStorage.setItem('reservedCards', JSON.stringify(selectedData));
+
+        if (modal) {
+            const tagBoxes = modal.querySelector('.tag-boxes');
+            const roomInput = modal.querySelector('#roomInput');
+
+            if (selectedData.length > 0) {
+                if (tagBoxes) tagBoxes.querySelector('span:first-child').textContent = selectedData[0].title;
+                if (roomInput) {
+                    roomInput.value = selectedData[0].room;
+                    roomInput.setAttribute('readonly', 'readonly');
+                }
+            }
+
+            modal.style.display = 'block';
+        }
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    if (stayDateInput) {
+        const fp = flatpickr(stayDateInput, {
+            mode: 'range',
+            dateFormat: 'Y.m.d',
+            locale: 'ko',
+            minDate: 'today',
+            allowInput: false,
+            onClose(selectedDates, dateStr, instance) {
+                if (selectedDates.length === 2) {
+                    stayDateInput.value =
+                        instance.formatDate(selectedDates[0], 'Y.m.d') + ' - ' +
+                        instance.formatDate(selectedDates[1], 'Y.m.d');
+                } else {
+                    stayDateInput.value = '';
+                }
+            }
+        });
+
+        icon?.addEventListener('click', () => fp.open());
+        icon?.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                fp.open();
+            }
+        });
+    }
+
+    btnNext?.addEventListener('click', function (e) {
+        // 모달 input들
+        const nameInput = document.getElementById('nameInput');
+        const ageInput = document.getElementById('ageInput');
+        const guestCountInput = document.getElementById('guestCountInput');
+        const stayDateInput = document.getElementById('stayDateInput');
+        const emailInput = document.getElementById('emailInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordConfirmInput = document.getElementById('passwordConfirmInput');
+
+        const reservationArr = [];
+
+        // 비밀번호 확인 검사
+        if (passwordInput.value !== passwordConfirmInput.value) {
+            alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+            return;
+        }
+
+        // 모달 내 .tag-boxes 첫 번째 span 텍스트
+        const tagBoxSpan = document.querySelector('.tag-boxes .tag-box');
+        const guesthouseTag = tagBoxSpan ? tagBoxSpan.textContent.trim() : '';
+
+        // #roomInput 값
+        const roomInput = document.getElementById('roomInput');
+        const roomInputVal = roomInput ? roomInput.value.trim() : '';
+
+        const card = Array.from(document.querySelectorAll('.room-card')).find(cardEl => {
+            return cardEl.querySelector('.room-title')?.textContent.trim() === roomInputVal;
+        });
+
+        if (!card) {
+            alert('선택한 객실 정보를 찾을 수 없습니다.');
+            return;
+        }
+
+
+        const title = document.querySelector('.place-name')?.textContent.trim() || '';
+        const location = card.querySelector('.location-text')?.textContent.trim() || '';
+        const roomTop = card.querySelector('.room-title')?.textContent.trim() || '';
+        const roomMiddle = card.querySelector('.room-desc')?.textContent.trim() || '';
+        const roomBottom = card.querySelector('.room-meta')?.textContent.trim() || '';
+        const priceOriginal = card.querySelector('.original-price')?.textContent.trim() || '';
+        const priceDiscount = card.querySelector('.discount-price')?.textContent.trim() || '';
+
+        // 모달 정보
+        const modalData = {
+            name: nameInput.value.trim(),
+            age: ageInput.value.trim(),
+            guestCount: guestCountInput.value.trim(),
+            stayDate: stayDateInput.value.trim(),
+            email: emailInput.value.trim(),
+            password: passwordInput.value,
+            guesthouseTag,  // 추가
+            roomInputVal    // 추가
+        };
+
+        // 카드 정보 + 모달 정보 합침
+        const reservationObj = {
+            card: {
+                title,
+                location,
+                roomTop,
+                roomMiddle,
+                roomBottom,
+                priceOriginal,
+                priceDiscount,
+            },
+            user: modalData
+        };
+
+        reservationArr.push(reservationObj);
+
+        localStorage.setItem('reservations', JSON.stringify(reservationArr));
+
+        alert('예약 정보가 저장되었습니다.');
+
+    });
 });
+
+
+
 
