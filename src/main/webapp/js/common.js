@@ -8,7 +8,7 @@ fetch("include/header.html")
 
     // 메뉴 버튼 이벤트
     const menuBtn = document.querySelector(".menu");
-    const closeBtn = document.querySelector(".close-btn");
+    const closeMenuBtn = document.querySelector(".close-btn");
     const menubar = document.querySelector(".menubar");
 
     if (menuBtn) {
@@ -16,8 +16,8 @@ fetch("include/header.html")
         menubar.classList.add("active");
       });
     }
-    if (closeBtn) {
-      closeBtn.addEventListener("click", () => {
+    if (closeMenuBtn) {
+      closeMenuBtn.addEventListener("click", () => {
         menubar.classList.remove("active");
       });
     }
@@ -58,6 +58,26 @@ fetch("include/header.html")
       if (e.which === 13) {
         $searchIcon.click();
       }
+    });
+
+    // 예약 버튼 클릭 시 Confirm 창 띄우기
+    $('#reserveBtn').on('click', function (e) {
+      e.preventDefault();
+      $('#confirmModal').addClass('show');
+      console.log("확인");
+      $('#confirmModal').fadeIn();
+    });
+
+    // 확인 버튼 클릭 시 검색 input에 focus
+    $('#confirmBtn').on('click', function () {
+      $('#confirmModal').fadeOut();  // 모달 닫기
+      $('#searchInput').focus();  // 검색 input에 포커스
+    });
+
+    // 취소 버튼 클릭 시 모달만 닫고 페이지에 머무르기
+    $('#cancelBtn').on('click', function () {
+      $('#confirmModal').fadeOut();  // 모달 닫기
+      $('#confirmModal').removeClass('show');
     });
   });
 
