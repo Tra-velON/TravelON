@@ -1,4 +1,4 @@
-.modal {
+#modalWrap.modal {
   display: none;
   position: fixed;
   top: 0; 
@@ -8,7 +8,7 @@
   background-color: rgba(0,0,0,0.6);
   z-index: 1000;
 }
-.modal-container {
+#modalWrap .modal-container {
   position: relative;
   top: 50%;
   left: 50%;
@@ -16,31 +16,31 @@
   width: 720px;
   padding: 30px 40px;
   border-radius: 20px;
+  border: 15px solid #dadada;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   background: white;
 }
-.modal-header {
+#modalWrap .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
 }
-.modal-header .info-head {
+#modalWrap .modal-header .info-head {
   display: flex;
   align-items: center;
   gap: 6px;
 }
-.modal-header .info-head img {
+#modalWrap .modal-header .info-head img {
   width: 48px;
 }
-.modal-header span {
+#modalWrap .modal-header span {
   display: inline-block;
   width: 80px;
   font-size: 24px;
   font-weight: bold;
 }
-
-.modal-close {
+#modalWrap .modal-close {
   position: absolute;
   top: 0;
   right: 20px;
@@ -49,47 +49,45 @@
   background: none;
   cursor: pointer;
 }
-
-/* modal-body 2열 그리드 구성 */
-.modal-body {
+#modalWrap .modal-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 30px;
   row-gap: 20px;
 }
-.form-group {
+#modalWrap .form-group {
   display: flex;
   flex-direction: column;
 }
-.form-group label {
+#modalWrap .form-group label {
   font-weight: 600;
   margin-bottom: 5px;
 }
-.form-group input {
+#modalWrap .form-group input {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 10px;
   color: var(--input-placeholder-color);
   font-size: 0.875rem;
 }
-.form-group input.invalid {
+#modalWrap .form-group input.invalid {
   border-color: #dc3545;
 }
-.form-group input.valid {
+#modalWrap .form-group input.valid {
   border-color: #28a745;
 }
-.tag-boxes {
+#modalWrap .tag-boxes {
   display: flex;
   gap: 10px;
 }
-.tag-box {
+#modalWrap .tag-box {
   background-color: #f1f1f1;
   padding: 6px 12px;
   border-radius: 8px;
   font-size: 16px;
   user-select: none;
 }
-.btn-next {
+#modalWrap .btn-next {
   position: absolute;
   bottom: 30px;
   right: 40px;
@@ -103,19 +101,17 @@
   border-radius: 6px;
   transition: background-color 0.2s ease;
 }
-.btn-next:hover {
+#modalWrap .btn-next:hover {
   background-color: #555D7E;
   color: white;
 }
-
-/* 데이트피커 아이콘 및 래퍼 */
-.date-picker-wrapper {
+#modalWrap .date-picker-wrapper {
   position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
 }
-#stayDateInput {
+#modalWrap #stayDateInput {
   flex: 1;
   cursor: pointer;
   background-color: #fff;
@@ -125,7 +121,7 @@
   padding: 10px;
   font-size: 16px;
 }
-.date-picker-icon {
+#modalWrap .date-picker-icon {
   width: 28px;
   height: 28px;
   cursor: pointer;
@@ -134,6 +130,6 @@
   user-select: none;
   transition: fill 0.2s ease;
 }
-.date-picker-icon:hover {
+#modalWrap .date-picker-icon:hover {
   fill: #0056b3;
 }

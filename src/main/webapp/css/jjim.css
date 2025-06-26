@@ -251,3 +251,7 @@
 	min-width: 90px;
 	text-align: right;
 }
+
+.card-modal {
+  display: none; /* 또는 flex */
+}
