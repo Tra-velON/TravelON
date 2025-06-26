@@ -328,6 +328,13 @@ main {
     transition: all 0.2s ease;
 }
 
+.disabled-btn {
+    background-color: #ccc;
+    color: #999;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 .reserve-btn:hover {
     background-color: #f5f5f5;
 }

@@ -99,6 +99,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const originalEl = card.querySelector(".original-price");
             const discountEl = card.querySelector(".discount-price");
 
+            if (baseDiscount == 0) {
+                originalEl.textContent = " ";
+                discountEl.textContent = "예약이 마감되었습니다.";
+                $(card).find('.reserve-btn')
+                    .prop('disabled', true)
+                    .text('예약 마감')
+                    .addClass('disabled-btn');
+                return;
+            }
+
             if (originalEl && discountEl) {
                 const finalOriginal = baseOriginal + priceGap;
                 const finalDiscount = baseDiscount + priceGap;
@@ -226,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const passwordConfirmInput = document.getElementById('passwordConfirmInput');
 
         const reservationArr = [];
-        
+
         // 비밀번호 확인 검사
         if (passwordInput.value !== passwordConfirmInput.value) {
             alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
