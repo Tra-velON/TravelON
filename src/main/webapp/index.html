@@ -19,8 +19,15 @@
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
     />
 
+    <!-- Link Swiper's CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/main.css" />
+
   </head>
   <body>
     <div id="wrap">
@@ -36,11 +43,6 @@
             </div>
             <div class="intro-bg"></div>
           </div>
-          <div class="scroll-btn">
-            <a href="#notice">
-              <img src="image/scroll.png" alt="scroll" loading="lazy" />
-            </a>
-          </div>
         </section>
         <!-- section: 공지사항 -->
         <section class="notice" id="notice">
@@ -54,6 +56,7 @@
             </a>
           </div>
         </section>
+
         <!-- section: event -->
         <section class="event">
           <div class="inner">
@@ -71,51 +74,57 @@
                   <span>단, 7월 말까지</span>
                 </div>
               </div>
-              <ul>
-                <li>
-                  <div class="photo">
-                    <a href="#">
-                      <img
-                      src="image/event02.webp"
-                      alt="이벤트-02"
-                      loading="lazy"
-                    />
-                    </a>
-                  </div>
-                  <div class="info">
-                    <div class="info-detail">
-                      <span>TRAVLEON과 </span>
-                      <span>함께 떠나는</span>
+              <div class="swiper mySwiper event-wrap">
+                <div class="swiper-wrapper event-lists">
+                  <div class="swiper-slide event-list">
+                    <div class="photo">
+                      <a href="#">
+                        <img src="image/event02.webp" alt="이벤트-02" loading="lazy" />
+                      </a>
                     </div>
-                    <span>서울 근처 50% 할인</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="photo">
-                    <a href="#">
-                      <img
-                      src="image/event03.webp"
-                      alt="이벤트-03"
-                      loading="lazy"
-                    />
-                    </a>
-                  </div>
-                  <div class="info">
-                    <div class="info-detail">
-                      <span>2만원 즉시할인</span>
-                      <span>가족 동반 시 x2!</span>
+                    <div class="info">
+                      <div class="info-detail">
+                        <span>TRAVLEON과</span>
+                        <span>함께 떠나는</span>
+                      </div>
+                      <span>서울 근처 50% 할인</span>
                     </div>
-                    <span>국민카드로 결제하기</span>
                   </div>
-                </li>
-              </ul>
-            </div>
-            <div class="progress-bar">
-              <span></span>
-              <span></span>
+                  <div class="swiper-slide event-list">
+                    <div class="photo">
+                      <a href="#">
+                        <img src="image/event03.webp" alt="이벤트-03" loading="lazy" />
+                      </a>
+                    </div>
+                    <div class="info">
+                      <div class="info-detail">
+                        <span>2만원 즉시할인</span>
+                        <span>가족 동반 시 x2!</span>
+                      </div>
+                      <span>국민카드로 결제하기</span>
+                    </div>
+                  </div>
+                  <div class="swiper-slide event-list">
+                    <div class="photo">
+                      <a href="#">
+                        <img src="image/event02.webp" alt="이벤트-02" loading="lazy" />
+                      </a>
+                    </div>
+                    <div class="info">
+                      <div class="info-detail">
+                        <span>TRAVLEON과</span>
+                        <span>함께 떠나는</span>
+                      </div>
+                      <span>서울 근처 50% 할인</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
             </div>
           </div>
         </section>
+
         <!-- section: 놀라운 혜택! -->
         <section class="benefit">
           <div class="inner">
@@ -196,9 +205,9 @@
         <section class="weeklysale">
           <div class="inner">
             <h2 class="title">이번 주 특가 숙소</h2>
-            <div class="content">
-              <ul class="lists">
-                <li class="list">
+            <div class="swiper weeklysaleSwiper content">
+              <ul class="swiper-wrapper lists">
+                <li class="swiper-slide list">
                   <div class="photo">
                     <a href="#none">
                       <img
@@ -216,7 +225,7 @@
                     </div>
                   </div>
                 </li>
-                <li class="list">
+                <li class="swiper-slide list">
                   <div class="photo">
                     <a href="#none">
                       <img
@@ -234,9 +243,64 @@
                     </div>
                   </div>
                 </li>
-                <li class="list">
+                <li class="swiper-slide list">
                   <div class="photo">
-                    <a>
+                    <a href="#none">
+                      <img
+                        src="image/weeklysale03.webp"
+                        alt="ABC 홈스테이"
+                        loading="lazy"
+                      />
+                    </a>
+                  </div>
+                  <div class="info">
+                    <span>ABC 홈스테이</span>
+                    <div class="price">
+                      <span class="sale">35%</span>
+                      <span>35,000원</span>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="swiper-slide list">
+                  <div class="photo">
+                    <a href="#none">
+                      <img
+                        src="image/weeklysale01.webp"
+                        alt="코코아 게스트하우스"
+                        loading="lazy"
+                      />
+                    </a>
+                  </div>
+                  <div class="info">
+                    <span>코코아 게스트하우스</span>
+                    <div class="price">
+                      <span class="sale">70%</span>
+                      <span>35,000원~</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="swiper-slide list">
+                  <div class="photo">
+                    <a href="#none">
+                      <img
+                        src="image/weeklysale02.webp"
+                        alt="해운대 Y 게스트하우스"
+                        loading="lazy"
+                      />
+                    </a>
+                  </div>
+                  <div class="info">
+                    <span>해운대 Y 게스트하우스</span>
+                    <div class="price">
+                      <span class="sale">55%</span>
+                      <span>25,000원~</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="swiper-slide list">
+                  <div class="photo">
+                    <a href="#none">
                       <img
                         src="image/weeklysale03.webp"
                         alt="ABC 홈스테이"
@@ -253,34 +317,39 @@
                   </div>
                 </li>
               </ul>
-            </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
           </div>
         </section>
         <!-- section: 이번 달 추천 숙소 -->
         <section class="weeklyrecommend">
           <div class="inner">
             <h2 class="title">이번 달 추천 숙소</h2>
-            <div class="content">
-              <ul class="lists">
-                <li class="list">
+            <div class="swiper weeklyrecommendSwiper content">
+              <ul class="swiper-wrapper lists">
+                <li class="swiper-slide list">
                   <div class="photo">
-                    <img
-                      src="image/weeklyrecommend01.jpg"
-                      alt="백팩 GH 이태원"
-                      loading="lazy"
-                    />
+                    <a href="#none">
+                      <img
+                        src="image/weeklyrecommend01.jpg"
+                        alt="백팩 GH 이태원"
+                        loading="lazy"
+                      />
+                    </a>
                   </div>
                   <div class="info">
                     <h3>서울 <br />패밀리/단체형 <br />백팩 GH 이태원</h3>
                   </div>
                 </li>
-                <li class="list">
+                <li class="swiper-slide list">
                   <div class="photo">
-                    <img
-                      src="image/weeklyrecommend02.jpg"
-                      alt="백팩 GH 이태원"
-                      loading="lazy"
-                    />
+                    <a href="#none">
+                      <img
+                        src="image/weeklyrecommend02.jpg"
+                        alt="백팩 GH 이태원"
+                        loading="lazy"
+                      />
+                    </a>
                   </div>
                   <div class="info">
                     <h3>
@@ -288,24 +357,75 @@
                     </h3>
                   </div>
                 </li>
-                <li class="list">
+                <li class="swiper-slide list">
                   <div class="photo">
-                    <img
-                      src="image/weeklyrecommend03.jpg"
-                      alt="백팩 GH 이태원"
-                      loading="lazy"
-                    />
+                    <a href="#none">
+                      <img
+                        src="image/weeklyrecommend03.jpg"
+                        alt="백팩 GH 이태원"
+                        loading="lazy"
+                      />
+                    </a>
+                  </div>
+                  <div class="info">
+                    <h3>부산 <br />테마/특수형 <br />오게스트</h3>
+                  </div>
+                </li>
+                <li class="swiper-slide list">
+                  <div class="photo">
+                    <a href="#none">
+                      <img
+                        src="image/weeklyrecommend01.jpg"
+                        alt="백팩 GH 이태원"
+                        loading="lazy"
+                      />
+                    </a>
+                  </div>
+                  <div class="info">
+                    <h3>서울 <br />패밀리/단체형 <br />백팩 GH 이태원</h3>
+                  </div>
+                </li>
+                <li class="swiper-slide list">
+                  <div class="photo">
+                    <a href="#none">
+                      <img
+                        src="image/weeklyrecommend02.jpg"
+                        alt="백팩 GH 이태원"
+                        loading="lazy"
+                      />
+                    </a>
+                  </div>
+                  <div class="info">
+                    <h3>
+                      인천 <br />프라이빗형 <br />인천공항 라인 게스트하우스
+                    </h3>
+                  </div>
+                </li>
+                <li class="swiper-slide list">
+                  <div class="photo">
+                    <a href="#none">
+                      <img
+                        src="image/weeklyrecommend03.jpg"
+                        alt="백팩 GH 이태원"
+                        loading="lazy"
+                      />
+                    </a>
                   </div>
                   <div class="info">
                     <h3>부산 <br />테마/특수형 <br />오게스트</h3>
                   </div>
                 </li>
               </ul>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
             </div>
           </div>
         </section>
+
         <!-- section: 띠배너 -->
         <section class="skip_ad"></section>
+
+        <!-- section: 웰컴 쿠폰 -->
         <section class="welcome">
           <div class="inner">
             <h2 class="title">WELCOM COUPON</h2>
@@ -329,55 +449,12 @@
             <h2 class="title">많이 찾는 볼거리</h2>
             <div class="content">
               <ul class="tabs">
-                <li class="tab active">서울</li>
-                <li class="tab">부산</li>
-                <li class="tab">인천</li>
+                <li class="tab active" data-city="seoul">서울</li>
+                <li class="tab" data-city="busan">부산</li>
+                <li class="tab" data-city="incheon">인천</li>
               </ul>
               <div>
-                <ul class="lists">
-                  <li class="list">
-                    <div class="photo">
-                      <a href="#none">
-                        <img src="image/popular01.webp" alt="남산타워" loading="lazy" />
-                      </a>
-                    </div>
-                    <div class="info">
-                      <span>남산타워</span>
-                      <p>
-                        서울의 대표적인 명소
-                        가족/친구/연인과 함께
-                      </p>
-                    </div>
-                  </li>
-                  <li class="list">
-                    <div class="photo">
-                      <a href="#none">
-                        <img src="image/popular02.webp" alt="남산타워" loading="lazy" />
-                      </a>
-                    </div>
-                    <div class="info">
-                      <span>경복궁</span>
-                      <p>
-                        서울의 대표적인 명소
-                        가족/친구/연인과 함께
-                      </p>
-                    </div>
-                  </li>
-                  <li class="list">
-                    <div class="photo">
-                      <a href="#none">
-                        <img src="image/popular03.webp" alt="남산타워" loading="lazy" />
-                      </a>
-                    </div>
-                    <div class="info">
-                      <span>한강</span>
-                      <p>
-                        서울의 대표적인 명소
-                        가족/친구/연인과 함께
-                      </p>
-                    </div>
-                  </li>
-                </ul>
+                <ul class="popularlists"></ul>
               </div>
             </div>
           </div>
@@ -429,6 +506,10 @@
       <img src="image/scrollTop.png" alt="scroll-top" loading="lazy" />
     </div>
 
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <script src="js/common.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
